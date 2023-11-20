@@ -1,0 +1,169 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Scenes/map.tmx",
+    "expandedProjectPaths": [
+        "Scenes",
+        ".",
+        "TileSets"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "Back.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "Background.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Build.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 0.33
+        },
+        "Env.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.33
+        },
+        "Plat.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "Scenes/map.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2298,
+                "y": 980
+            }
+        },
+        "TEST.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "TileSets/AI.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 0.33
+        },
+        "TileSets/Back.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TileSets/Demoset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.25
+        },
+        "TileSets/Grass.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 0.33
+        },
+        "TileSets/Hextiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.03125,
+            "scaleInEditor": 0.12
+        },
+        "TileSets/Lights.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        },
+        "TileSets/Mossy.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.0625,
+            "scaleInEditor": 0.33
+        },
+        "TileSets/Mossy2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.33
+        },
+        "TileSets/Objects.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "TileSets/TEst ANimation.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 0.33
+        },
+        "TileSets/TestAnimation2.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.25
+        },
+        "TileSets/Tiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1.5
+        },
+        "TileSets/hex.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.25
+        },
+        "Wide_Door_04.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "map.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1181.8181818181818,
+                "y": 733.3333333333334
+            }
+        }
+    },
+    "frame.defaultDuration": 50,
+    "last.exportedFilePath": "C:/work home/Flynn/MateDev/assets",
+    "last.externalTilesetPath": "C:/work home/Flynn/MateDev/assets/TileSets",
+    "last.imagePath": "C:/work home/Flynn/MateDev/assets/res/Hexe",
+    "last.objectTemplatePath": "C:/work home/Flynn/MateDev/assets",
+    "lastUsedTilesetExportFilter": "JSON tileset files (*.tsj *.json)",
+    "map.height": 5,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 512,
+    "map.tileWidth": 512,
+    "map.width": 10,
+    "openFiles": [
+        "TileSets/Hextiles.tsx",
+        "Scenes/map.tmx"
+    ],
+    "project": "tiled-project.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "TileSets/Hextiles.tsx",
+        "Scenes/map.tmx",
+        "TileSets/Grass.tsx",
+        "TileSets/Demoset.tsx",
+        "TileSets/AI.tsx",
+        "TileSets/TEst ANimation.tsx",
+        "TileSets/TestAnimation2.tsx",
+        "TileSets/Mossy2.tsx",
+        "TileSets/Mossy.tsx",
+        "TileSets/hex.tsx",
+        "TileSets/Lights.tsx",
+        "TileSets/Objects.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 512,
+        "width": 512
+    },
+    "tileset.type": 1
+}

@@ -1,0 +1,99 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1100,
+    "extensionsPath": "extensions",
+    "folders": [
+        "."
+    ],
+    "properties": [
+    ],
+    "propertyTypes": [
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 2,
+            "members": [
+                {
+                    "name": "cast",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "color",
+                    "type": "color",
+                    "value": ""
+                },
+                {
+                    "name": "distance",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "light",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "p",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "scale",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "shake",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "particle",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 3,
+            "members": [
+                {
+                    "name": "cast",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "color",
+                    "type": "color",
+                    "value": ""
+                }
+            ],
+            "name": "pointlight",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset",
+                "project"
+            ]
+        }
+    ]
+}
