@@ -37,7 +37,7 @@
  <tile id="41">
   <image width="1024" height="512" source="../res/Hexe/verbessert.png"/>
  </tile>
- <tile id="43">
-  <image width="894" height="1190" source="../res/Hexe/tree.png"/>
+ <tile id="45">
+  <image width="894" height="1190" source="../../../../Users/sindr/Desktop/tt.png"/>
  </tile>
 </tileset>
