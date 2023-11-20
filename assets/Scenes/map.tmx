@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="3" nextobjectid="14">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="3" nextobjectid="15">
  <properties>
   <property name="ambientlight" type="color" value="#ff8a8a8a"/>
  </properties>
  <tileset firstgid="1" source="../TileSets/Grass.tsx"/>
- <tileset firstgid="21" source="../TileSets/Hextiles.tsx"/>
- <tileset firstgid="67" source="../TileSets/grass2.tsx"/>
+ <tileset firstgid="25" source="../TileSets/Hextiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="5">
   <data encoding="csv">
-67,67,67,67,67,67,67,67,67,67,
-67,67,67,67,67,67,67,67,67,67,
-67,67,67,67,67,67,67,67,67,67,
-67,67,67,67,67,67,67,67,67,67,
-67,67,67,67,67,67,67,67,67,67
+22,3221225494,1073741846,3221225494,22,1073741846,3221225494,1073741846,3221225494,22,
+3221225494,3221225494,3221225494,22,3221225494,2147483670,3221225494,1073741846,22,3221225494,
+1073741846,22,1073741846,1073741846,2147483670,3221225494,2147483670,3221225494,22,1073741846,
+2147483670,3221225494,2147483670,22,3221225494,3221225494,3221225494,3221225494,3221225494,2147483670,
+3221225494,22,3221225494,22,3221225494,2147483670,3221225494,2147483670,3221225494,2147483670
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="2" type="pointlight" x="708" y="-244" width="1494" height="1494">
+  <object id="2" type="pointlight" x="2332" y="3748" width="1494" height="1494">
    <properties>
     <property name="cast" type="bool" value="true"/>
     <property name="color" type="color" value="#ff00ffff"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="11" gid="55" x="2510.79" y="1805.39" width="600" height="376"/>
-  <object id="13" gid="66" x="2249" y="1461" width="894" height="1190">
+  <object id="11" gid="59" x="2510.79" y="1805.39" width="600" height="376"/>
+  <object id="13" gid="70" x="2249" y="1461" width="894" height="1190">
    <properties>
     <property name="animation" value="Tree01"/>
     <property name="animationfirststate" value="animation"/>

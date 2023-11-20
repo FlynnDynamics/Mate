@@ -6,8 +6,8 @@
     "activeFile": "Scenes/map.tmx",
     "expandedProjectPaths": [
         "Scenes",
-        ".",
-        "TileSets"
+        "TileSets",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -37,10 +37,10 @@
         },
         "Scenes/map.tmx": {
             "scale": 0.25,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 2298,
-                "y": 980
+                "x": 2926,
+                "y": 1872
             }
         },
         "TEST.tsx": {
@@ -63,12 +63,12 @@
         },
         "TileSets/Grass.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 0.33,
+            "scaleInDock": 0.125,
             "scaleInEditor": 0.33
         },
         "TileSets/Hextiles.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 0.03125,
+            "scaleInDock": 0.0625,
             "scaleInEditor": 0.12
         },
         "TileSets/Lights.tsx": {
@@ -106,6 +106,7 @@
             "scaleInEditor": 1.5
         },
         "TileSets/grass2.tsx": {
+            "scaleInDock": 0.25,
             "scaleInEditor": 0.5
         },
         "TileSets/hex.tsx": {
@@ -144,15 +145,16 @@
     "map.width": 10,
     "openFiles": [
         "TileSets/Hextiles.tsx",
-        "Scenes/map.tmx"
+        "Scenes/map.tmx",
+        "TileSets/Grass.tsx"
     ],
     "project": "tiled-project.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "TileSets/Grass.tsx",
         "TileSets/grass2.tsx",
         "TileSets/Hextiles.tsx",
         "Scenes/map.tmx",
-        "TileSets/Grass.tsx",
         "TileSets/Demoset.tsx",
         "TileSets/AI.tsx",
         "TileSets/TEst ANimation.tsx",
