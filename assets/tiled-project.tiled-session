@@ -5,8 +5,8 @@
     },
     "activeFile": "Scenes/map.tmx",
     "expandedProjectPaths": [
-        ".",
         "Scenes",
+        ".",
         "TileSets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -36,11 +36,11 @@
             "scaleInEditor": 1
         },
         "Scenes/map.tmx": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2337.878787878788,
-                "y": 996.969696969697
+                "x": 2298,
+                "y": 980
             }
         },
         "TEST.tsx": {
@@ -105,6 +105,9 @@
             "scaleInDock": 1.5,
             "scaleInEditor": 1.5
         },
+        "TileSets/grass2.tsx": {
+            "scaleInEditor": 0.5
+        },
         "TileSets/hex.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.125,
@@ -130,7 +133,7 @@
     "frame.defaultDuration": 50,
     "last.exportedFilePath": "C:/work home/Flynn/MateDev/assets",
     "last.externalTilesetPath": "C:/work home/Flynn/MateDev/assets/TileSets",
-    "last.imagePath": "C:/Users/sindr/Desktop",
+    "last.imagePath": "C:/work home/Mate/assets/res/grass",
     "last.objectTemplatePath": "C:/work home/Flynn/MateDev/assets",
     "lastUsedTilesetExportFilter": "JSON tileset files (*.tsj *.json)",
     "map.height": 5,
@@ -146,6 +149,7 @@
     "project": "tiled-project.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "TileSets/grass2.tsx",
         "TileSets/Hextiles.tsx",
         "Scenes/map.tmx",
         "TileSets/Grass.tsx",
@@ -156,8 +160,7 @@
         "TileSets/Mossy2.tsx",
         "TileSets/Mossy.tsx",
         "TileSets/hex.tsx",
-        "TileSets/Lights.tsx",
-        "TileSets/Objects.tsx"
+        "TileSets/Lights.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

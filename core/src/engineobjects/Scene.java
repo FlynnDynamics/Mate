@@ -154,6 +154,7 @@ public class Scene {
                 initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
 
                 String[] textureKey = Gdx.files.internal(mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get((int) longArray[countOne][countTwo] - Integer.parseInt(tilesetInfo[0])).get("image").get("source")).name().split("\\.");
+                System.out.println(textureKey[0]);
                 Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
                 sprite.setPosition(tileWidth * countTwo, sceneHeight - tileHeight * (countOne + 1));
 

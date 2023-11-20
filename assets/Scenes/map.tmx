@@ -5,13 +5,14 @@
  </properties>
  <tileset firstgid="1" source="../TileSets/Grass.tsx"/>
  <tileset firstgid="21" source="../TileSets/Hextiles.tsx"/>
+ <tileset firstgid="67" source="../TileSets/grass2.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="5">
   <data encoding="csv">
-4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4
+67,67,67,67,67,67,67,67,67,67,
+67,67,67,67,67,67,67,67,67,67,
+67,67,67,67,67,67,67,67,67,67,
+67,67,67,67,67,67,67,67,67,67,
+67,67,67,67,67,67,67,67,67,67
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">

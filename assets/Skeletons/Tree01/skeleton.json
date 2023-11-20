@@ -1,0 +1,126 @@
+{
+"skeleton": {
+	"hash": "E7mIIoYJ560",
+	"spine": "4.1.24",
+	"x": -502.04,
+	"y": -9.67,
+	"width": 893.1,
+	"height": 1189.64,
+	"images": "./images/",
+	"audio": "C:/work home/res/Spine/Tree01"
+},
+"bones": [
+	{ "name": "root", "rotation": -162.1 },
+	{ "name": "bone", "parent": "root", "length": 377.51, "rotation": -111.03, "x": -9.52, "y": -29.5 },
+	{ "name": "bone2", "parent": "bone", "length": 333.21, "rotation": 61.82, "x": 445.57, "y": 26.26 },
+	{ "name": "bone3", "parent": "bone2", "length": 122.23, "rotation": 31.9, "x": 353.08, "y": 1.85 },
+	{ "name": "bone4", "parent": "bone2", "length": 91.18, "rotation": -60.39, "x": 168.82, "y": -7.2 },
+	{ "name": "bone5", "parent": "bone4", "length": 108, "rotation": 71.92, "x": 135.88, "y": 42.15 },
+	{ "name": "bone6", "parent": "bone", "length": 161.98, "rotation": 9.3, "x": 624.35, "y": 70.51 },
+	{ "name": "bone7", "parent": "bone6", "length": 140.81, "rotation": -2.35, "x": 202.1, "y": -0.82 },
+	{ "name": "bone8", "parent": "bone", "length": 156.77, "rotation": -47.72, "x": 625.84, "y": 41.51 },
+	{ "name": "bone9", "parent": "bone8", "length": 88.38, "rotation": -97.59, "x": 151.5, "y": -45.66 }
+],
+"slots": [
+	{ "name": "Ast_03", "bone": "bone8", "attachment": "Ast_03" },
+	{ "name": "ast_04", "bone": "bone4", "attachment": "ast_04" },
+	{ "name": "Stamm", "bone": "bone", "attachment": "Stamm" },
+	{ "name": "blaetter_04", "bone": "bone5", "attachment": "blaetter_04" },
+	{ "name": "blaetter_09", "bone": "bone9", "attachment": "blaetter_03" },
+	{ "name": "blaetter_08", "bone": "bone9" },
+	{ "name": "blaetter_07", "bone": "bone9" },
+	{ "name": "blaetter_06", "bone": "bone9" },
+	{ "name": "blaetter_03", "bone": "bone9" },
+	{ "name": "ast_02", "bone": "bone2", "attachment": "ast_02" },
+	{ "name": "blaetter_05", "bone": "bone3", "attachment": "blaetter_02" },
+	{ "name": "blaetter_02", "bone": "bone3" },
+	{ "name": "Ast_04", "bone": "bone6", "attachment": "Ast_01" },
+	{ "name": "Ast_02", "bone": "bone6" },
+	{ "name": "Ast_01", "bone": "bone6" },
+	{ "name": "blaetter_01", "bone": "bone7", "attachment": "blaetter_01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"ast_02": {
+				"ast_02": { "x": 193.97, "y": 35.97, "rotation": -148.82, "width": 423, "height": 235 }
+			},
+			"Ast_03": {
+				"Ast_03": { "x": 64.18, "y": -25.4, "rotation": -39.28, "width": 209, "height": 201 }
+			},
+			"Ast_04": {
+				"Ast_01": { "x": 120.51, "y": -13.17, "rotation": -96.23, "width": 116, "height": 270 }
+			},
+			"ast_04": {
+				"ast_04": { "x": 69.93, "y": 43.31, "rotation": -88.56, "width": 148, "height": 181 }
+			},
+			"blaetter_01": {
+				"blaetter_01": { "x": 75.69, "y": -48.42, "rotation": -93.72, "width": 501, "height": 483 }
+			},
+			"blaetter_04": {
+				"blaetter_04": { "x": 116.11, "y": 36.05, "rotation": -160.35, "width": 167, "height": 261 }
+			},
+			"blaetter_05": {
+				"blaetter_02": { "x": 92.15, "y": 47.43, "rotation": 179.28, "width": 211, "height": 355 }
+			},
+			"blaetter_09": {
+				"blaetter_03": { "x": 231.76, "y": -20.9, "rotation": 58.44, "width": 297, "height": 423 }
+			},
+			"Stamm": {
+				"Stamm": { "x": 339.25, "y": 114.65, "rotation": -86.63, "width": 560, "height": 769 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"bones": {
+			"bone": {
+				"shear": [
+					{},
+					{ "time": 1.6667, "x": -1 },
+					{ "time": 4, "x": 1 },
+					{ "time": 5 }
+				]
+			},
+			"bone2": {
+				"shear": [
+					{},
+					{ "time": 1.6667, "x": -3.36 },
+					{ "time": 4, "x": -0.21 },
+					{ "time": 5 }
+				]
+			},
+			"bone8": {
+				"rotate": [
+					{},
+					{ "time": 4, "value": 1.41 },
+					{ "time": 5 }
+				],
+				"shear": [
+					{ "y": 5 },
+					{ "time": 1.6667, "y": 3 },
+					{ "time": 4, "y": 8.13 },
+					{ "time": 5, "y": 5 }
+				]
+			},
+			"bone6": {
+				"rotate": [
+					{},
+					{ "time": 1.6667, "value": -2.3 },
+					{ "time": 4, "value": 0.7 },
+					{ "time": 5 }
+				]
+			},
+			"bone4": {
+				"rotate": [
+					{},
+					{ "time": 2.3333, "value": -2.68 },
+					{ "time": 4.3333 }
+				]
+			}
+		}
+	}
+}
+}

@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mate.engine.MateEngine;
 import engineobjects.Scene;
 import org.xml.sax.SAXException;
@@ -41,8 +43,8 @@ public class ContentCanvas implements Screen, InputProcessor {
 
             camera = new OrthographicCamera();
             camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            //Viewport viewport = new FitViewport(2560f, 1440f, camera);
-            //viewport.apply();
+            Viewport viewport = new FitViewport(2560f, 1440f, camera);
+            viewport.apply();
 
             scene = mateEngine.getMateAssetManager().getScene("map.tmx");
         } catch (ParserConfigurationException e) {
