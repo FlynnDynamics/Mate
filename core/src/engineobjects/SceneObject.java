@@ -130,45 +130,45 @@ public class SceneObject extends Sprite {
 
     @Override
     public void draw(Batch batch) {
-            if (skeleton != null) {
-                animationState.update(Gdx.graphics.getDeltaTime());
-                animationState.apply(skeleton);
-                skeleton.updateWorldTransform();
-            }
+        if (skeleton != null) {
+            animationState.update(Gdx.graphics.getDeltaTime());
+            animationState.apply(skeleton);
+            skeleton.updateWorldTransform();
+        }
 
-            if (spriteShadow) {
-                if (shadowBuffer == null)
-                    initShadowBuffer();
-                //-----------------
-                batch.end();
-                //-----------------
-                tempVW = new Vector2(this.getX(), this.getY());
-                setPosition(ContentCanvas.camera.position.x - ((ContentCanvas.camera.viewportWidth / 2) * ContentCanvas.camera.zoom), ContentCanvas.camera.position.y - ((ContentCanvas.camera.viewportHeight / 2) * ContentCanvas.camera.zoom));
-                //-----------------
-                shadowBuffer.begin();
-                Gdx.gl.glClearColor(0, 0, 0, 0);
-                Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-                batch.begin();
-                batch.enableBlending();
-                if (skeleton != null)
-                    skeletonRenderer.draw(batch, skeleton);
-                else
-                    super.draw(batch);
-                batch.end();
-                shadowBuffer.end();
-                //-----------------
-                setPosition(tempVW.x, tempVW.y);
-                //-----------------
-                batch.setProjectionMatrix(MateEngine.getNoProjection());
-                batch.begin();
-                Texture texture = shadowBuffer.getColorBufferTexture();
-                for (PointLight light : sceneLayer.getScene().getPointLights())
-                    updateShadowRegion(batch, texture, light.getDistance(), light.getX(), light.getY(), originOffsetX, originOffsetY, offsetY);
-                batch.end();
-                batch.setProjectionMatrix(ContentCanvas.camera.combined);
-                //-----------------
-                batch.begin();
-            }
+        if (spriteShadow) {
+            if (shadowBuffer == null)
+                initShadowBuffer();
+            //-----------------
+            batch.end();
+            //-----------------
+            tempVW = new Vector2(this.getX(), this.getY());
+            setPosition(ContentCanvas.camera.position.x - ((ContentCanvas.camera.viewportWidth / 2) * ContentCanvas.camera.zoom), ContentCanvas.camera.position.y - ((ContentCanvas.camera.viewportHeight / 2) * ContentCanvas.camera.zoom));
+            //-----------------
+            shadowBuffer.begin();
+            Gdx.gl.glClearColor(0, 0, 0, 0);
+            Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+            batch.begin();
+            batch.enableBlending();
+            if (skeleton != null)
+                skeletonRenderer.draw(batch, skeleton);
+            else
+                super.draw(batch);
+            batch.end();
+            shadowBuffer.end();
+            //-----------------
+            setPosition(tempVW.x, tempVW.y);
+            //-----------------
+            batch.setProjectionMatrix(MateEngine.getNoProjection());
+            batch.begin();
+            Texture texture = shadowBuffer.getColorBufferTexture();
+            for (PointLight light : sceneLayer.getScene().getPointLights())
+                updateShadowRegion(batch, texture, light.getDistance(), light.getX(), light.getY(), originOffsetX, originOffsetY, offsetY);
+            batch.end();
+            batch.setProjectionMatrix(ContentCanvas.camera.combined);
+            //-----------------
+            batch.begin();
+        }
 
         if (skeleton != null)
             skeletonRenderer.draw(batch, skeleton);
@@ -194,7 +194,7 @@ public class SceneObject extends Sprite {
         skeleton.setScale(this.getWidth() / resWidth, this.getHeight() / resHeight);
 
         AnimationStateData stateData = new AnimationStateData(skeleton.getData());
-        skeleton.setPosition(this.getX() + this.getWidth() / 2, this.getY());
+        skeleton.setPosition(this.getX() - skeleton.getData().getX() * (this.getWidth() / resWidth), this.getY() - skeleton.getData().getY() * (this.getHeight() / resHeight));
         animationState = new AnimationState(stateData);
         animationState.setAnimation(0, firstState, true);
 
