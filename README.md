@@ -20,8 +20,8 @@ Comprehensive documentation is available to guide you through the various featur
 
 ## Licensing
 
-Mate is not an open-source software. For information regarding licensing and usage, please contact us directly at `contact-email@example.com`.
+Mate is not an open-source software. For information regarding licensing and usage, please contact us directly at `sindri.weinstein@gmail.com`.
 
 ## Support and Contact
 
-Should you have any inquiries, support requests, or need assistance with Mate, please do not hesitate to contact us at `contact-email@example.com`. We are dedicated to providing the support you need to make the most out of Mate for your game development endeavors.
+Should you have any inquiries, support requests, or need assistance with Mate, please do not hesitate to contact us at `sindri.weinstein@gmail.com`. We are dedicated to providing the support you need to make the most out of Mate for your game development endeavors.
