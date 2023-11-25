@@ -21,3 +21,7 @@ Mate is not an open-source software. For information regarding licensing and usa
 ## Support and Contact
 
 Should you have any inquiries, support requests, or need assistance with Mate, please do not hesitate to contact us at `sindri.weinstein@gmail.com`. We are dedicated to providing the support you need to make the most out of Mate for your game development endeavors.
+
+Special thanks to our project supporter:
+
+- **Andreas Müller** - for his invaluable contributions and insights that have greatly assisted the development of Mate.
