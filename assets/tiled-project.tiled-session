@@ -6,8 +6,8 @@
     "activeFile": "Scenes/map.tmx",
     "expandedProjectPaths": [
         "Scenes",
-        "TileSets",
-        "."
+        ".",
+        "TileSets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -37,10 +37,10 @@
         },
         "Scenes/map.tmx": {
             "scale": 0.25,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 2926,
-                "y": 1872
+                "x": 2958,
+                "y": 1136
             }
         },
         "TEST.tsx": {
@@ -64,7 +64,7 @@
         "TileSets/Grass.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.125,
-            "scaleInEditor": 0.33
+            "scaleInEditor": 0.12
         },
         "TileSets/Hextiles.tsx": {
             "dynamicWrapping": true,
@@ -134,7 +134,7 @@
     "frame.defaultDuration": 50,
     "last.exportedFilePath": "C:/work home/Flynn/MateDev/assets",
     "last.externalTilesetPath": "C:/work home/Flynn/MateDev/assets/TileSets",
-    "last.imagePath": "C:/work home/Mate/assets/res/grass",
+    "last.imagePath": "C:/work home/Mate/assets/res/Hexe",
     "last.objectTemplatePath": "C:/work home/Flynn/MateDev/assets",
     "lastUsedTilesetExportFilter": "JSON tileset files (*.tsj *.json)",
     "map.height": 5,
@@ -144,17 +144,17 @@
     "map.tileWidth": 512,
     "map.width": 10,
     "openFiles": [
-        "TileSets/Hextiles.tsx",
         "Scenes/map.tmx",
-        "TileSets/Grass.tsx"
+        "TileSets/Grass.tsx",
+        "TileSets/Hextiles.tsx"
     ],
     "project": "tiled-project.tiled-project",
-    "property.type": "bool",
+    "property.type": "float",
     "recentFiles": [
-        "TileSets/Grass.tsx",
-        "TileSets/grass2.tsx",
         "TileSets/Hextiles.tsx",
+        "TileSets/Grass.tsx",
         "Scenes/map.tmx",
+        "TileSets/grass2.tsx",
         "TileSets/Demoset.tsx",
         "TileSets/AI.tsx",
         "TileSets/TEst ANimation.tsx",

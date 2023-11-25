@@ -37,7 +37,6 @@ public class LightObject {
     }
 
     private Random random;
-
     private float time;
 
     public void update() {

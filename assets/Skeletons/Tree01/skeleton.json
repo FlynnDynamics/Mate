@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "E7mIIoYJ560",
+	"hash": "cc/qNNhuOnM",
 	"spine": "4.1.24",
 	"x": -502.04,
 	"y": -9.67,
@@ -37,7 +37,12 @@
 	{ "name": "Ast_04", "bone": "bone6", "attachment": "Ast_01" },
 	{ "name": "Ast_02", "bone": "bone6" },
 	{ "name": "Ast_01", "bone": "bone6" },
-	{ "name": "blaetter_01", "bone": "bone7", "attachment": "blaetter_01" }
+	{ "name": "blaetter_01", "bone": "bone7", "attachment": "blaetter_01" },
+	{ "name": "tree", "bone": "root", "color": "fffdfe00" },
+	{ "name": "tree4", "bone": "root" },
+	{ "name": "tree3", "bone": "root" },
+	{ "name": "tree2", "bone": "root" },
+	{ "name": "tree5", "bone": "root" }
 ],
 "skins": [
 	{
