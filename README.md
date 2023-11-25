@@ -12,7 +12,7 @@ A standout feature of Mate is its dynamic shadow system, which brings games to l
 
 ## Getting Started
 
-To begin working with Mate, you will need to set up your development environment with the latest version of Java and LibGDX. For information on acquiring Mate, please contact us at `contact-email@example.com`.
+To begin working with Mate, you will need to set up your development environment with the latest version of Java and LibGDX. For information on acquiring Mate, please contact us at `sindri.weinstein@gmail.com`.
 
 ## Documentation
 
