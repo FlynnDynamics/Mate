@@ -10,10 +10,6 @@ Mate enhances your game development workflow with its built-in support for Tiled
 ### Dynamic Shadow System
 A standout feature of Mate is its dynamic shadow system, which brings games to life with realistic and dynamic lighting effects. This system enhances the visual depth and immersion of your game environments.
 
-## Getting Started
-
-To begin working with Mate, you will need to set up your development environment with the latest version of Java and LibGDX. For information on acquiring Mate, please contact us at `sindri.weinstein@gmail.com`.
-
 ## Documentation
 
 Comprehensive documentation is available to guide you through the various features and capabilities of Mate. Visit our [documentation page](link-to-documentation) for in-depth instructions and tips on leveraging Mate for your game development projects.
