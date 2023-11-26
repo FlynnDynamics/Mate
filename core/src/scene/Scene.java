@@ -59,13 +59,13 @@ public class Scene {
         if (time > 1440.0f)
             time = 0;
 
-        batch.setProjectionMatrix(MateCanvas.camera.combined);
+        batch.setProjectionMatrix(MateCanvas.sceneCamera.combined);
         batch.begin();
         for (SceneLayer sceneLayer : sceneLayers)
             sceneLayer.render(batch);
         batch.end();
 
-        globalHandler.setCombinedMatrix(MateCanvas.camera);
+        globalHandler.setCombinedMatrix(MateCanvas.sceneCamera);
         globalHandler.updateAndRender();
 
     }

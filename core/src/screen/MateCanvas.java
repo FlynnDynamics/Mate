@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -23,7 +24,12 @@ public class MateCanvas implements Screen, InputProcessor {
 
     private Scene scene;
     private SpriteBatch batch;
-    public static OrthographicCamera camera;
+
+    public static OrthographicCamera sceneCamera;
+
+    public static Vector2 getScreenOrigin() {
+        return new Vector2(sceneCamera.position.x - ((sceneCamera.viewportWidth / 2) * sceneCamera.zoom), sceneCamera.position.y - ((sceneCamera.viewportHeight / 2) * sceneCamera.zoom));
+    }
 
     public MateCanvas(MateEngine mateEngine) {
         this.mateEngine = mateEngine;
@@ -41,9 +47,9 @@ public class MateCanvas implements Screen, InputProcessor {
             batch = new SpriteBatch();
             batch.maxSpritesInBatch = 50000;
 
-            camera = new OrthographicCamera();
-            camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            Viewport viewport = new FitViewport(2560f, 1440f, camera);
+            sceneCamera = new OrthographicCamera();
+            sceneCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            Viewport viewport = new FitViewport(2560f, 1440f, sceneCamera);
             viewport.apply();
 
             scene = mateEngine.getMateAssetManager().getScene("map.tmx");
@@ -63,38 +69,38 @@ public class MateCanvas implements Screen, InputProcessor {
     public void updateCamera() {
         zoomSpeed = 10f;
         zoomSpeed *= Gdx.graphics.getDeltaTime();
-        targetZoom = camera.zoom;
-        interpolationFactor = 0.5f * camera.zoom;
+        targetZoom = sceneCamera.zoom;
+        interpolationFactor = 0.5f * sceneCamera.zoom;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT))
-            camera.zoom = 1;
+            sceneCamera.zoom = 1;
 
         if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE) && !Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
             float deltaX = Gdx.input.getDeltaX();
             float deltaY = -Gdx.input.getDeltaY();
 
-            deltaX += camera.position.x;
-            deltaY += camera.position.y;
+            deltaX += sceneCamera.position.x;
+            deltaY += sceneCamera.position.y;
 
-            camera.position.lerp(new Vector3(deltaX, deltaY, camera.position.z), interpolationFactor);
+            sceneCamera.position.lerp(new Vector3(deltaX, deltaY, sceneCamera.position.z), interpolationFactor);
         }
-        camera.update();
+        sceneCamera.update();
     }
 
 
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            Matrix4 tempM = camera.combined;
-            Vector3 temV = camera.position;
-            float zoom = camera.zoom;
+            Matrix4 tempM = sceneCamera.combined;
+            Vector3 temV = sceneCamera.position;
+            float zoom = sceneCamera.zoom;
 
             dispose();
             loadScene();
 
-            camera.combined.set(tempM);
-            camera.position.set(temV);
-            camera.zoom = zoom;
+            sceneCamera.combined.set(tempM);
+            sceneCamera.position.set(temV);
+            sceneCamera.zoom = zoom;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
@@ -195,13 +201,13 @@ public class MateCanvas implements Screen, InputProcessor {
             else if (amountY < 0)
                 targetZoom -= zoomSpeed;
 
-            camera.zoom = MathUtils.lerp(camera.zoom, targetZoom, interpolationFactor);
-            camera.update();
+            sceneCamera.zoom = MathUtils.lerp(sceneCamera.zoom, targetZoom, interpolationFactor);
+            sceneCamera.update();
         }
         return false;
     }
 
     public OrthographicCamera getCamera() {
-        return camera;
+        return sceneCamera;
     }
 }
