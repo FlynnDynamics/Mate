@@ -41,7 +41,7 @@
   <properties>
    <property name="masky" type="float" value="70"/>
    <property name="offsety" type="float" value="70"/>
-   <property name="originoffsetx" type="float" value="-100"/>
+   <property name="originoffsetx" type="float" value="50"/>
    <property name="originoffsety" type="float" value="-550"/>
    <property name="spriteshadow" type="bool" value="true"/>
   </properties>

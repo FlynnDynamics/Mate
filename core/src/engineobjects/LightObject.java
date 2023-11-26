@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class LightObject {
-    private Scene scene;
+    private final Scene scene;
     private PointLight pointLight;
 
     private Color color;

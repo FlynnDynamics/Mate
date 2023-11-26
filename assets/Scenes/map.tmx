@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="39">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="42">
  <properties>
   <property name="ambientlight" type="color" value="#ff686868"/>
  </properties>
@@ -15,36 +15,36 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="2" type="pointlight" x="2100.25" y="394.761" width="1470" height="1167.6">
-   <properties>
-    <property name="cast" type="bool" value="true"/>
-    <property name="color" type="color" value="#ff00ffff"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="36" gid="71" x="1974.21" y="1370.76" width="894" height="1190">
-   <properties>
-    <property name="animation" value="Tree01"/>
-    <property name="animationfirststate" value="animation"/>
-    <property name="masky" type="float" value="70"/>
-    <property name="offsety" type="float" value="70"/>
-    <property name="originoffsetx" type="float" value="-100"/>
-    <property name="originoffsety" type="float" value="-550"/>
-    <property name="spriteshadow" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="37" gid="71" x="3245" y="1945" width="894" height="1190">
    <properties>
     <property name="animation" value="Tree01"/>
     <property name="animationfirststate" value="animation"/>
     <property name="masky" type="float" value="70"/>
     <property name="offsety" type="float" value="70"/>
-    <property name="originoffsetx" type="float" value="-100"/>
+    <property name="originoffsetx" type="float" value="50"/>
     <property name="originoffsety" type="float" value="-550"/>
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="38" type="pointlight" x="3433" y="856.2" width="1470" height="1167.6">
+  <object id="38" type="pointlight" x="3222.45" y="1050.62" width="1470" height="1167.6">
+   <properties>
+    <property name="cast" type="bool" value="true"/>
+    <property name="color" type="color" value="#ff00ffff"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="39" gid="71" x="1627.55" y="1520.19" width="894" height="1190">
+   <properties>
+    <property name="animation" value="Tree01"/>
+    <property name="animationfirststate" value="animation"/>
+    <property name="masky" type="float" value="70"/>
+    <property name="offsety" type="float" value="70"/>
+    <property name="originoffsetx" type="float" value="50"/>
+    <property name="originoffsety" type="float" value="-550"/>
+    <property name="spriteshadow" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="40" type="pointlight" x="1605" y="625.81" width="1470" height="1167.6">
    <properties>
     <property name="cast" type="bool" value="true"/>
     <property name="color" type="color" value="#ff00ffff"/>

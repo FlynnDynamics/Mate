@@ -1,5 +1,5 @@
 plugins { id 'org.beryx.runtime' version '1.8.4' }
-sourceCompatibility = 1.8
+sourceCompatibility = 17
 sourceSets.main.java.srcDirs = [ "src/" ]
 sourceSets.main.resources.srcDirs = ["../assets"]
 

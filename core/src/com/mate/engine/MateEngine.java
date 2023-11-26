@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import org.xml.sax.SAXException;
 import screen.MateCanvas;
 
@@ -142,6 +144,16 @@ public class MateEngine extends Game {
     @Override
     public void resume() {
         super.resume();
+    }
+
+    public static Vector3 getDistance(Vector2 p1, Vector2 p2) {
+        float deltaY = p1.y - p2.y;
+        float deltaX = p1.x - p2.x;
+        return new Vector3(deltaX, deltaY, (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY));
+    }
+
+    public static float getDegree(float deltaX, float deltaY) {
+        return (float) Math.toDegrees(Math.atan2(deltaY, deltaX));
     }
 
     public static Matrix4 getNoProjection() {

@@ -246,7 +246,7 @@ public class Scene {
             }
 
             if (tilesetDataMap.containsKey("properties"))
-                propertyMap.putAll(tilesetDataMap.get("properties"));
+            tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
 
             propertyMap.put("reswidth", tilesetDataMap.get("image").get("width"));
             propertyMap.put("resheight", tilesetDataMap.get("image").get("height"));
@@ -256,7 +256,7 @@ public class Scene {
             sceneObject.setFlip(flags[0] != 0, flags[1] != 0);
 
             if (propertyMap.containsKey("animation"))
-                sceneObject.initSpineAnimation(propertyMap.get("animation"), propertyMap.get("animationfirststate"));
+                sceneObject.initAnimation(propertyMap.get("animation"), propertyMap.get("animationfirststate"));
             sceneObjects.add(sceneObject);
 
         }

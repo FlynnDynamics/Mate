@@ -20,7 +20,7 @@ import java.io.IOException;
 public class MateCanvas implements Screen, InputProcessor {
 
 
-    private MateEngine mateEngine;
+    private final MateEngine mateEngine;
 
     private Scene scene;
     private SpriteBatch batch;
@@ -53,11 +53,7 @@ public class MateCanvas implements Screen, InputProcessor {
             viewport.apply();
 
             scene = mateEngine.getMateAssetManager().getScene("map.tmx");
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
     }
@@ -104,10 +100,7 @@ public class MateCanvas implements Screen, InputProcessor {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
-            if (MateEngine.DEBUG)
-                MateEngine.DEBUG = false;
-            else
-                MateEngine.DEBUG = true;
+            MateEngine.DEBUG = !MateEngine.DEBUG;
         }
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
