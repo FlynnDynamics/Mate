@@ -1,4 +1,4 @@
-package engineobjects;
+package scene;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -12,13 +12,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mate.engine.MateEngine;
 import com.mate.engine.MateSceneLoader;
-import engineobjects.SceneLayer;
-import engineobjects.SceneObject;
+import engineobjects.LightObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import screen.ContentCanvas;
+import screen.MateCanvas;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -30,7 +29,9 @@ public class Scene {
     private final MateSceneLoader mateSceneLoader;
 
     private final String sceneName;
-    private Array<PointLight> pointLights;
+
+    private Array<PointLight> castLights;
+    private Array<LightObject> staticLights;
 
     private Map<String, TextureAtlas> atlasMap;
 
@@ -58,13 +59,13 @@ public class Scene {
         if (time > 1440.0f)
             time = 0;
 
-        batch.setProjectionMatrix(ContentCanvas.camera.combined);
+        batch.setProjectionMatrix(MateCanvas.camera.combined);
         batch.begin();
         for (SceneLayer sceneLayer : sceneLayers)
             sceneLayer.render(batch);
         batch.end();
 
-        globalHandler.setCombinedMatrix(ContentCanvas.camera);
+        globalHandler.setCombinedMatrix(MateCanvas.camera);
         globalHandler.updateAndRender();
 
     }
@@ -96,7 +97,10 @@ public class Scene {
         atlasMap = new HashMap<>();
         world = new World(new Vector2(0, 0), false);
         globalHandler = new RayHandler(world);
-        pointLights = new Array<>();
+
+        castLights = new Array<>();
+        staticLights = new Array<>();
+
         createScene();
     }
 
@@ -313,8 +317,12 @@ public class Scene {
         return ambientColor;
     }
 
-    public Array<PointLight> getPointLights() {
-        return pointLights;
+    public Array<PointLight> getCastLights() {
+        return castLights;
+    }
+
+    public Array<LightObject> getStaticLights() {
+        return staticLights;
     }
 
     public RayHandler getGlobalHandler() {

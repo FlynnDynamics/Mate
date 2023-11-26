@@ -4,13 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import org.xml.sax.SAXException;
-import screen.ContentCanvas;
+import screen.MateCanvas;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class MateEngine extends Game {
     private BitmapFont font;
     private OrthographicCamera camera;
     private MateSceneLoader mateSceneLoader;
-    private ContentCanvas contentCanvas;
+    private MateCanvas mateCanvas;
 
     public static boolean DEBUG;
 
@@ -51,7 +50,7 @@ public class MateEngine extends Game {
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
-        setScreen(contentCanvas = new ContentCanvas(this));
+        setScreen(mateCanvas = new MateCanvas(this));
     }
 
 
@@ -75,13 +74,13 @@ public class MateEngine extends Game {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         font.getData().setScale(1);
-        font.draw(batch, "PosX " + contentCanvas.getCamera().position.x + " PosY " + contentCanvas.getCamera().position.y, 0, 15);
-        font.draw(batch, "Scale: " + contentCanvas.getCamera().zoom, 0, 30);
+        font.draw(batch, "PosX " + mateCanvas.getCamera().position.x + " PosY " + mateCanvas.getCamera().position.y, 0, 15);
+        font.draw(batch, "Scale: " + mateCanvas.getCamera().zoom, 0, 30);
         font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 45);
-        font.draw(batch, "Tick: " + contentCanvas.getScene().getTime(), 0, 60);
+        font.draw(batch, "Tick: " + mateCanvas.getScene().getTime(), 0, 60);
         font.draw(batch, "Delta : " + Gdx.graphics.getDeltaTime(), 0, 75);
-        font.draw(batch, "Current Scene: " + contentCanvas.getScene().getSceneName(), 0, Gdx.graphics.getHeight());
-        font.draw(batch, "Scene Size : " + contentCanvas.getScene().getWidthTileCount() + " X " + contentCanvas.getScene().getHeightTileCount() + " Tile: " + contentCanvas.getScene().getTileWidth() + "px", 0, Gdx.graphics.getHeight() - 15);
+        font.draw(batch, "Current Scene: " + mateCanvas.getScene().getSceneName(), 0, Gdx.graphics.getHeight());
+        font.draw(batch, "Scene Size : " + mateCanvas.getScene().getWidthTileCount() + " X " + mateCanvas.getScene().getHeightTileCount() + " Tile: " + mateCanvas.getScene().getTileWidth() + "px", 0, Gdx.graphics.getHeight() - 15);
         batch.end();
 
         shapeRenderer.setProjectionMatrix(camera.combined);
@@ -89,9 +88,9 @@ public class MateEngine extends Game {
         shapeRenderer.circle(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 5);
         shapeRenderer.end();
 
-        shapeRenderer.setProjectionMatrix(contentCanvas.getCamera().combined);
+        shapeRenderer.setProjectionMatrix(mateCanvas.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(0, 0, contentCanvas.getScene().getSceneWidth(), contentCanvas.getScene().getSceneHeight());
+        shapeRenderer.rect(0, 0, mateCanvas.getScene().getSceneWidth(), mateCanvas.getScene().getSceneHeight());
 
         if (DEBUG) {
             debugRenderer();
@@ -100,13 +99,13 @@ public class MateEngine extends Game {
             for (Float[] floats : debugResolutionInfo) {
 
                 shapeRenderer.setColor(Color.YELLOW);
-                shapeRenderer.rect(contentCanvas.getCamera().position.x - floats[0] / 2, contentCanvas.getCamera().position.y - floats[1] / 2, floats[0], floats[1]);
+                shapeRenderer.rect(mateCanvas.getCamera().position.x - floats[0] / 2, mateCanvas.getCamera().position.y - floats[1] / 2, floats[0], floats[1]);
                 shapeRenderer.setColor(Color.WHITE);
 
-                batch.setProjectionMatrix(contentCanvas.getCamera().combined);
+                batch.setProjectionMatrix(mateCanvas.getCamera().combined);
                 batch.begin();
                 font.getData().setScale(3);
-                font.draw(batch, floats[0] + " * " + floats[1], contentCanvas.getCamera().position.x - floats[0] / 2, contentCanvas.getCamera().position.y + floats[1] / 2);
+                font.draw(batch, floats[0] + " * " + floats[1], mateCanvas.getCamera().position.x - floats[0] / 2, mateCanvas.getCamera().position.y + floats[1] / 2);
                 batch.end();
             }
         }

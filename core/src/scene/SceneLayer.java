@@ -1,9 +1,12 @@
-package engineobjects;
+package scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import engineobjects.LightObject;
+import engineobjects.ParticleObject;
+import engineobjects.PolyObject;
 
 import java.util.Map;
 
@@ -55,7 +58,7 @@ public class SceneLayer {
             String[] coordinates = vectorStrings[i].split(",");
             vectors[i] = new Vector2(Float.parseFloat(coordinates[0]), -Float.parseFloat(coordinates[1]));
         }
-        new ScenePoly(attributeMap, propertyMap, vectors, this);
+        new PolyObject(attributeMap, propertyMap, vectors, this);
     }
 
 

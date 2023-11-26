@@ -1,4 +1,4 @@
-package engineobjects;
+package scene;
 
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
@@ -10,16 +10,20 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.esotericsoftware.spine.*;
 import com.mate.engine.MateEngine;
-import screen.ContentCanvas;
+import scene.SceneLayer;
+import screen.MateCanvas;
 
 import java.util.Map;
 
 public class SceneObject extends Sprite {
     private SceneLayer sceneLayer;
+
     private boolean object;
     private int id;
+
     private boolean spriteShadow;
     private float originOffsetX, originOffsetY, offsetY, maskY;
+
     private float resWidth, resHeight;
     private float opacity;
 
@@ -97,15 +101,15 @@ public class SceneObject extends Sprite {
         TextureRegion region = new TextureRegion(texture);
         region.flip(false, true);
 
-        float centerX = this.getHeight() / (2 * ContentCanvas.camera.viewportWidth / Gdx.graphics.getWidth());
-        float centerY = this.getHeight() / (2 * ContentCanvas.camera.viewportHeight / Gdx.graphics.getHeight());
+        float centerX = this.getHeight() / (2 * MateCanvas.camera.viewportWidth / Gdx.graphics.getWidth());
+        float centerY = this.getHeight() / (2 * MateCanvas.camera.viewportHeight / Gdx.graphics.getHeight());
 
         if (this.isFlipX())
             originOffsetX *= -1;
 
-        originOffsetX *= 1 / (ContentCanvas.camera.viewportWidth / Gdx.graphics.getWidth());
-        originOffsetY *= 1 / (ContentCanvas.camera.viewportHeight / Gdx.graphics.getHeight());
-        offsetY *= 1 / (ContentCanvas.camera.viewportHeight / Gdx.graphics.getHeight());
+        originOffsetX *= 1 / (MateCanvas.camera.viewportWidth / Gdx.graphics.getWidth());
+        originOffsetY *= 1 / (MateCanvas.camera.viewportHeight / Gdx.graphics.getHeight());
+        offsetY *= 1 / (MateCanvas.camera.viewportHeight / Gdx.graphics.getHeight());
 
         centerX += originOffsetX;
         centerY += originOffsetY;
@@ -113,10 +117,10 @@ public class SceneObject extends Sprite {
         float scaleY = 2f - (float) Math.exp(-distance / lightDistance);
         float scaleX = 0.7f / scaleY;
 
-        Vector3 vp = ContentCanvas.camera.project(new Vector3(tempVW.x, tempVW.y, 0));
+        Vector3 vp = MateCanvas.camera.project(new Vector3(tempVW.x, tempVW.y, 0));
 
         batch.setColor(new Color(0, 0, 0, 1));
-        batch.draw(region, vp.x + 0 * (1 / ContentCanvas.camera.zoom), vp.y + offsetY * (1 / ContentCanvas.camera.zoom), centerX * (1 / ContentCanvas.camera.zoom), centerY * (1 / ContentCanvas.camera.zoom), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), scaleX, scaleY, degree + 90);
+        batch.draw(region, vp.x + 0 * (1 / MateCanvas.camera.zoom), vp.y + offsetY * (1 / MateCanvas.camera.zoom), centerX * (1 / MateCanvas.camera.zoom), centerY * (1 / MateCanvas.camera.zoom), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), scaleX, scaleY, degree + 90);
         batch.setColor(Color.WHITE);
     }
 
@@ -124,14 +128,14 @@ public class SceneObject extends Sprite {
 
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
-        shapeRenderer.setProjectionMatrix(ContentCanvas.camera.combined);
+        shapeRenderer.setProjectionMatrix(MateCanvas.camera.combined);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFuncSeparate(GL20.GL_ZERO, GL20.GL_ZERO, GL20.GL_ZERO, GL20.GL_ZERO);
 
         shapeRenderer.begin();
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(ContentCanvas.camera.position.x - ((ContentCanvas.camera.viewportWidth / 2) * ContentCanvas.camera.zoom), ContentCanvas.camera.position.y - ((ContentCanvas.camera.viewportHeight / 2) * ContentCanvas.camera.zoom), this.getWidth(), maskY);
+        shapeRenderer.rect(MateCanvas.camera.position.x - ((MateCanvas.camera.viewportWidth / 2) * MateCanvas.camera.zoom), MateCanvas.camera.position.y - ((MateCanvas.camera.viewportHeight / 2) * MateCanvas.camera.zoom), this.getWidth(), maskY);
         shapeRenderer.flush();
         shapeRenderer.end();
 
@@ -158,7 +162,7 @@ public class SceneObject extends Sprite {
             batch.end();
             //-----------------
             tempVW = new Vector2(this.getX(), this.getY());
-            setPosition(ContentCanvas.camera.position.x - ((ContentCanvas.camera.viewportWidth / 2) * ContentCanvas.camera.zoom), ContentCanvas.camera.position.y - ((ContentCanvas.camera.viewportHeight / 2) * ContentCanvas.camera.zoom));
+            setPosition(MateCanvas.camera.position.x - ((MateCanvas.camera.viewportWidth / 2) * MateCanvas.camera.zoom), MateCanvas.camera.position.y - ((MateCanvas.camera.viewportHeight / 2) * MateCanvas.camera.zoom));
             //-----------------
             shadowBuffer.begin();
             Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -180,10 +184,10 @@ public class SceneObject extends Sprite {
             batch.setProjectionMatrix(MateEngine.getNoProjection());
             batch.begin();
             Texture texture = shadowBuffer.getColorBufferTexture();
-            for (PointLight light : sceneLayer.getScene().getPointLights())
+            for (PointLight light : sceneLayer.getScene().getCastLights())
                 updateShadowRegion(batch, texture, light.getDistance(), light.getX(), light.getY(), originOffsetX, originOffsetY, offsetY);
             batch.end();
-            batch.setProjectionMatrix(ContentCanvas.camera.combined);
+            batch.setProjectionMatrix(MateCanvas.camera.combined);
             //-----------------
             batch.begin();
         }

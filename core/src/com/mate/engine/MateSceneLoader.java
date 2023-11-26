@@ -1,7 +1,7 @@
 package com.mate.engine;
 
 import com.badlogic.gdx.Gdx;
-import engineobjects.Scene;
+import scene.Scene;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

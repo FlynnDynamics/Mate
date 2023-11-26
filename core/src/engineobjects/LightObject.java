@@ -4,6 +4,7 @@ import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.mate.engine.MateEngine;
+import scene.Scene;
 
 import java.util.Map;
 import java.util.Random;
@@ -41,8 +42,10 @@ public class LightObject {
         pointLight = new PointLight(scene.getGlobalHandler(), 150, color, width / 2, this.x, this.y);
         pointLight.setStaticLight(true);
         pointLight.setXray(true);
+
         if (cast)
-            scene.getPointLights().add(pointLight);
+            scene.getCastLights().add(pointLight);
+        scene.getStaticLights().add(this);
     }
 
     public void createObjectLight(float x, float y) {
@@ -52,7 +55,7 @@ public class LightObject {
         pointLight = new PointLight(scene.getGlobalHandler(), 150, color, distance, this.x, this.y);
 
         if (cast)
-            scene.getPointLights().add(pointLight);
+            scene.getCastLights().add(pointLight);
     }
 
     private boolean shake, wobble, pulse;
@@ -88,6 +91,11 @@ public class LightObject {
             } else
                 timeP += Gdx.graphics.getDeltaTime();
 
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        pointLight.setColor(color);
     }
 
     public void setPosition(float x, float y) {

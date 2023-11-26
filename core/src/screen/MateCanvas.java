@@ -10,13 +10,13 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mate.engine.MateEngine;
-import engineobjects.Scene;
+import scene.Scene;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
-public class ContentCanvas implements Screen, InputProcessor {
+public class MateCanvas implements Screen, InputProcessor {
 
 
     private MateEngine mateEngine;
@@ -25,7 +25,7 @@ public class ContentCanvas implements Screen, InputProcessor {
     private SpriteBatch batch;
     public static OrthographicCamera camera;
 
-    public ContentCanvas(MateEngine mateEngine) {
+    public MateCanvas(MateEngine mateEngine) {
         this.mateEngine = mateEngine;
         RayHandler.useDiffuseLight(true);
     }
@@ -141,9 +141,9 @@ public class ContentCanvas implements Screen, InputProcessor {
 
     }
 
-    public static ContentCanvas instance;
+    public static MateCanvas instance;
 
-    public static ContentCanvas getInstance() throws ParserConfigurationException, IOException, SAXException {
+    public static MateCanvas getInstance() throws ParserConfigurationException, IOException, SAXException {
         return instance;
     }
 

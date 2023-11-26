@@ -4,10 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ChainShape;
+import scene.SceneLayer;
 
 import java.util.Map;
 
-public class ScenePoly {
+public class PolyObject {
 
     private SceneLayer sceneLayer;
 
@@ -17,7 +18,7 @@ public class ScenePoly {
     private Body body;
 
 
-    public ScenePoly(Map<String, String> attributeMap, Map<String, String> propertyMap, Vector2[] vertices, SceneLayer sceneLayer) {
+    public PolyObject(Map<String, String> attributeMap, Map<String, String> propertyMap, Vector2[] vertices, SceneLayer sceneLayer) {
         this.attributeMap = attributeMap;
         this.propertyMap = propertyMap;
         this.sceneLayer = sceneLayer;
