@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mate.engine.MateEngine;
@@ -22,9 +23,8 @@ public class MateCanvas implements Screen, InputProcessor {
 
     private final MateEngine mateEngine;
 
-    private Scene scene;
-    private SpriteBatch batch;
-
+    private Stage sceneStage;
+    private Stage uiStage;
     public static OrthographicCamera sceneCamera;
 
     public static Vector2 getScreenOrigin() {
@@ -38,21 +38,18 @@ public class MateCanvas implements Screen, InputProcessor {
 
     @Override
     public void show() {
+        FitViewport fitViewport = new FitViewport(2560f, 1440f);
+        sceneStage = new Stage(fitViewport);
         Gdx.input.setInputProcessor(this);
         loadScene();
     }
 
+    private Scene currentScene;
+
     public void loadScene() {
         try {
-            batch = new SpriteBatch();
-            batch.maxSpritesInBatch = 50000;
-
-            sceneCamera = new OrthographicCamera();
-            sceneCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            Viewport viewport = new FitViewport(2560f, 1440f, sceneCamera);
-            viewport.apply();
-
-            scene = mateEngine.getMateAssetManager().getScene("map.tmx");
+            sceneCamera = (OrthographicCamera) sceneStage.getCamera();
+            currentScene = mateEngine.getMateAssetManager().getScene("map.tmx", sceneStage);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
@@ -87,16 +84,8 @@ public class MateCanvas implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            Matrix4 tempM = sceneCamera.combined;
-            Vector3 temV = sceneCamera.position;
-            float zoom = sceneCamera.zoom;
-
             dispose();
             loadScene();
-
-            sceneCamera.combined.set(tempM);
-            sceneCamera.position.set(temV);
-            sceneCamera.zoom = zoom;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
@@ -107,17 +96,17 @@ public class MateCanvas implements Screen, InputProcessor {
         //Gdx.gl.glClearColor(0, 0, 0, 1);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         updateCamera();
-        scene.render(batch);
+        currentScene.render();
     }
 
     @Override
     public void dispose() {
-        scene.dispose();
-        batch.dispose();
+        currentScene.dispose();
+        sceneStage.clear();
     }
 
-    public Scene getScene() {
-        return scene;
+    public Scene getCurrentScene() {
+        return currentScene;
     }
 
     @Override

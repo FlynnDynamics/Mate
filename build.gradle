@@ -9,7 +9,6 @@ buildscript {
         google()
     }
     dependencies {
-        
 
     }
 }
@@ -37,6 +36,7 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         maven { url "https://jitpack.io" }
     }
+
 }
 
 project(":desktop") {
@@ -84,4 +84,14 @@ task writeAllAssetsToFile {
     }
 }
 
+project(":core") {
+    apply plugin: "java-library"
+
+
+    dependencies {
+        api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation 'com.crashinvaders.vfx:gdx-vfx-core:0.5.0'
+        implementation 'com.crashinvaders.vfx:gdx-vfx-effects:0.5.0'
+    }
+}
 

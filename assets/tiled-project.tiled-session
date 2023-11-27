@@ -5,9 +5,9 @@
     },
     "activeFile": "Scenes/map.tmx",
     "expandedProjectPaths": [
+        "Scenes",
         ".",
-        "TileSets",
-        "Scenes"
+        "TileSets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -39,8 +39,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 3754,
-                "y": 1144
+                "x": 3290,
+                "y": 1168
             }
         },
         "TEST.tsx": {

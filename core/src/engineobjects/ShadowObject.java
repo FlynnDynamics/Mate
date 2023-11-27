@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.crashinvaders.vfx.framebuffer.VfxFrameBuffer;
 import com.mate.engine.MateEngine;
 import enums.ShadowType;
 import scene.SceneObject;
@@ -18,7 +18,7 @@ import screen.MateCanvas;
 
 public class ShadowObject {
     private SceneObject sceneObject;
-    private FrameBuffer frameBuffer;
+    private VfxFrameBuffer vfxFrameBuffer;
 
     private float originOffsetX, originOffsetY, offsetY, maskY;
 
@@ -27,22 +27,16 @@ public class ShadowObject {
     }
 
     public void createShadow(ShadowType shadowType, Vector2 position, Batch batch) {
-        Texture texture = getTexture(position, batch);
         //-----------------
-        batch.setProjectionMatrix(MateEngine.getNoProjection());
-        batch.begin();
         for (PointLight light : sceneObject.getSceneLayer().getScene().getCastLights())
             if (shadowType.equals(ShadowType.TYPE_1))
-                createType_1(texture, position, light, batch);
+                createType_1(position, light, batch);
             else if (shadowType.equals(ShadowType.TYPE_2))
-                createType_2(texture, position, light, batch);
-        batch.end();
-        batch.setProjectionMatrix(MateCanvas.sceneCamera.combined);
+                createType_2(position, light, batch);
         //-----------------
-        batch.begin();
     }
 
-    private void createType_1(Texture texture, Vector2 position, PointLight light, Batch batch) {
+    private void createType_1(Vector2 position, PointLight light, Batch batch) {
         Vector3 distVec = MateEngine.getDistance(new Vector2(light.getX(), light.getY()), sceneObject.getCenterPosition());
         //-----------------
         float degree = MateEngine.getDegree(distVec.x, distVec.y);
@@ -51,6 +45,7 @@ public class ShadowObject {
         if (distance >= light.getDistance())
             return;
         //-----------------
+        Texture texture = getTexture(position, batch);
         TextureRegion region = new TextureRegion(texture);
         region.flip(false, true);
         //-----------------
@@ -61,7 +56,7 @@ public class ShadowObject {
         float originOffsetY = this.originOffsetY * sceneObject.getResScale().y;
         float offsetY = this.offsetY * sceneObject.getResScale().y;
         //-----------------
-        if (sceneObject.isFlipX() && sceneObject.getSpineObject() == null)
+        if (sceneObject.getSprite().isFlipX() && sceneObject.getSpineObject() == null)
             originOffsetX *= -1;
         //-----------------
         originOffsetX *= 1 / (MateCanvas.sceneCamera.viewportWidth / Gdx.graphics.getWidth());
@@ -76,21 +71,23 @@ public class ShadowObject {
         //-----------------
         Vector3 vp = MateCanvas.sceneCamera.project(new Vector3(position.x, position.y, 0));
         //-----------------
+        batch.setProjectionMatrix(MateEngine.getNoProjection());
         batch.setColor(new Color(0, 0, 0, 1));
         batch.draw(region, vp.x + 0 * (1 / MateCanvas.sceneCamera.zoom), vp.y + offsetY * (1 / MateCanvas.sceneCamera.zoom), centerX * (1 / MateCanvas.sceneCamera.zoom), centerY * (1 / MateCanvas.sceneCamera.zoom), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), scaleX, scaleY, degree + 90);
         batch.setColor(Color.WHITE);
+        batch.setProjectionMatrix(MateCanvas.sceneCamera.combined);
         //-----------------
 
     }
 
-    private void createType_2(Texture texture, Vector2 position, PointLight light, Batch batch) {
+    private void createType_2(Vector2 position, PointLight light, Batch batch) {
 
     }
 
     private MaskObject maskObject;
 
     private Texture getTexture(Vector2 position, Batch batch) {
-        if (frameBuffer == null)
+        if (vfxFrameBuffer == null)
             initFrameBuffer();
         //-----------------
         batch.end();
@@ -98,14 +95,14 @@ public class ShadowObject {
         Vector2 screenOrigin = MateCanvas.getScreenOrigin();
         sceneObject.setPosition(screenOrigin.x, screenOrigin.y);
         //-----------------
-        frameBuffer.begin();
+        vfxFrameBuffer.begin();
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         batch.begin();
         if (sceneObject.getSpineObject() != null)
             sceneObject.getSpineObject().render(batch);
         else
-            sceneObject.directDraw(batch);
+            sceneObject.getSprite().draw(batch);
         batch.end();
         //-----------------
         if (maskY != 0) {
@@ -115,19 +112,22 @@ public class ShadowObject {
             maskObject.createRecMask(screenOrigin.x, screenOrigin.y, sceneObject.getWidth(), maskY * sceneObject.getResScale().y);
         }
         //-----------------
-        frameBuffer.end();
+        vfxFrameBuffer.end();
         //-----------------
         sceneObject.setPosition(position.x, position.y);
         //-----------------
-        return frameBuffer.getColorBufferTexture();
+        batch.begin();
+        //-----------------
+        return vfxFrameBuffer.getTexture();
     }
 
     private void initFrameBuffer() {
-        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+        vfxFrameBuffer = new VfxFrameBuffer(Pixmap.Format.RGBA8888);
+        vfxFrameBuffer.initialize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     public void dispose() {
-        frameBuffer.dispose();
+        vfxFrameBuffer.dispose();
         if (maskObject != null)
             maskObject.dispose();
     }

@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mate.engine.MateEngine;
 import com.mate.engine.MateSceneLoader;
@@ -27,24 +29,23 @@ import java.util.Map;
 public class Scene {
 
     private final MateSceneLoader mateSceneLoader;
-
     private final String sceneName;
+    private final Stage sceneStage;
 
-    private Array<PointLight> castLights;
-    private Array<LightObject> staticLights;
-
-    private Map<String, TextureAtlas> atlasMap;
-
-    public Scene(String sceneName, MateSceneLoader mateSceneLoader) throws ParserConfigurationException, IOException, SAXException {
+    public Scene(String sceneName, Stage sceneStage, MateSceneLoader mateSceneLoader) throws ParserConfigurationException, IOException, SAXException {
         this.sceneName = sceneName;
         this.mateSceneLoader = mateSceneLoader;
+        this.sceneStage = sceneStage;
 
         init();
     }
 
     private World world;
     private RayHandler globalHandler;
-    private Array<SceneLayer> sceneLayers;
+
+    private Array<PointLight> castLights;
+    private Array<LightObject> staticLights;
+    private Map<String, TextureAtlas> atlasMap;
 
     private int widthTileCount, heightTileCount;
     private int tileWidth, tileHeight;
@@ -53,17 +54,14 @@ public class Scene {
 
     private float time;
 
-    public void render(Batch batch) {
+    public void render() {
         time += Gdx.graphics.getDeltaTime();
 
         if (time > 1440.0f)
             time = 0;
 
-        batch.setProjectionMatrix(MateCanvas.sceneCamera.combined);
-        batch.begin();
-        for (SceneLayer sceneLayer : sceneLayers)
-            sceneLayer.render(batch);
-        batch.end();
+        sceneStage.act();
+        sceneStage.draw();
 
         globalHandler.setCombinedMatrix(MateCanvas.sceneCamera);
         globalHandler.updateAndRender();
@@ -93,7 +91,6 @@ public class Scene {
     }
 
     private void init() throws ParserConfigurationException, IOException, SAXException {
-        sceneLayers = new Array<>();
         atlasMap = new HashMap<>();
         world = new World(new Vector2(0, 0), false);
         globalHandler = new RayHandler(world);
@@ -132,19 +129,18 @@ public class Scene {
 
             if (nodeName.equals("layer")) {
                 SceneLayer sceneLayer = new SceneLayer(this, attributeMap, propertyMap, false);
-                sceneLayer.setSceneObjects(createLayer(mateSceneLoader.getBasicLayerMatrix(nodeList.item(0).getChildNodes().item(i).getTextContent()), sceneLayer));
-                sceneLayers.add(sceneLayer);
+                createLayer(mateSceneLoader.getBasicLayerMatrix(nodeList.item(0).getChildNodes().item(i).getTextContent()), sceneLayer);
+                sceneStage.addActor(sceneLayer);
             } else if (nodeName.equals("objectgroup")) {
                 SceneLayer sceneLayer = new SceneLayer(this, attributeMap, propertyMap, true);
-                sceneLayer.setSceneObjects(createObjectGroup(nodeList.item(0).getChildNodes().item(i), sceneLayer));
-                sceneLayers.add(sceneLayer);
+                createObjectGroup(nodeList.item(0).getChildNodes().item(i), sceneLayer);
+                sceneStage.addActor(sceneLayer);
             }
         }
 
     }
 
-    private Array<SceneObject> createLayer(long[][] longArray, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
-        Array<SceneObject> sceneObjects = new Array<>();
+    private void createLayer(long[][] longArray, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
         for (int countOne = 0; countOne < longArray.length; countOne++)
             for (int countTwo = 0; countTwo < longArray[countOne].length; countTwo++) {
                 if (longArray[countOne][countTwo] == 0)
@@ -158,7 +154,6 @@ public class Scene {
                 initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
 
                 String[] textureKey = Gdx.files.internal(mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get((int) longArray[countOne][countTwo] - Integer.parseInt(tilesetInfo[0])).get("image").get("source")).name().split("\\.");
-                System.out.println(textureKey[0]);
                 Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
                 sprite.setPosition(tileWidth * countTwo, sceneHeight - tileHeight * (countOne + 1));
 
@@ -176,14 +171,11 @@ public class Scene {
                 } else {
                     sprite.setFlip(flags[0] != 0, flags[1] != 0);
                 }
-                sceneObjects.add(new SceneObject(sprite, false, sceneLayer));
-
+                sceneLayer.addActor(new SceneObject(sprite, false, sceneLayer));
             }
-        return sceneObjects;
     }
 
-    private Array<SceneObject> createObjectGroup(Node node, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
-        Array<SceneObject> sceneObjects = new Array<>();
+    private void createObjectGroup(Node node, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
         for (int i = 0; i < node.getChildNodes().getLength(); i++) {
 
             if (node.getChildNodes().item(i).getNodeName().equals("#text"))
@@ -236,33 +228,31 @@ public class Scene {
                 double rotatedCenterY = centerX * sinRotation + centerY * cosRotation;
 
                 double cx = Double.parseDouble(attributeMap.get("x")) + rotatedCenterX;
-                double cy = Double.parseDouble(attributeMap.get("y")) + rotatedCenterY;
+                double cy = Double.parseDouble(attributeMap.get("y")) - rotatedCenterY;
 
                 double x = cx - centerX;
                 double y = cy + centerY;
+
+                System.out.println(y);
 
                 attributeMap.put("x", String.valueOf(x));
                 attributeMap.put("y", String.valueOf(y));
             }
 
             if (tilesetDataMap.containsKey("properties"))
-            tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
+                tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
 
             propertyMap.put("reswidth", tilesetDataMap.get("image").get("width"));
             propertyMap.put("resheight", tilesetDataMap.get("image").get("height"));
 
 
             sceneObject.initObject(attributeMap, propertyMap);
-            sceneObject.setFlip(flags[0] != 0, flags[1] != 0);
+            sceneObject.getSprite().setFlip(flags[0] != 0, flags[1] != 0);
 
             if (propertyMap.containsKey("animation"))
                 sceneObject.initAnimation(propertyMap.get("animation"), propertyMap.get("animationfirststate"));
-            sceneObjects.add(sceneObject);
-
+            sceneLayer.addActor(sceneObject);
         }
-
-        return sceneObjects;
-
     }
 
     private void initTextureAtlas(String path) {
@@ -280,8 +270,12 @@ public class Scene {
 
 
     public void dispose() {
-        for (SceneLayer sceneLayer : sceneLayers)
-            sceneLayer.dispose();
+        for (Actor actor : sceneStage.getActors())
+            if (actor instanceof SceneLayer) {
+                SceneLayer sceneLayer = (SceneLayer) actor;
+                sceneLayer.dispose();
+            }
+
         world.dispose();
         globalHandler.dispose();
 

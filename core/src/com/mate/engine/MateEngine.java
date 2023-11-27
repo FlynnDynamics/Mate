@@ -79,10 +79,10 @@ public class MateEngine extends Game {
         font.draw(batch, "PosX " + mateCanvas.getCamera().position.x + " PosY " + mateCanvas.getCamera().position.y, 0, 15);
         font.draw(batch, "Scale: " + mateCanvas.getCamera().zoom, 0, 30);
         font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 45);
-        font.draw(batch, "Tick: " + mateCanvas.getScene().getTime(), 0, 60);
+        font.draw(batch, "Tick: " + mateCanvas.getCurrentScene().getTime(), 0, 60);
         font.draw(batch, "Delta : " + Gdx.graphics.getDeltaTime(), 0, 75);
-        font.draw(batch, "Current Scene: " + mateCanvas.getScene().getSceneName(), 0, Gdx.graphics.getHeight());
-        font.draw(batch, "Scene Size : " + mateCanvas.getScene().getWidthTileCount() + " X " + mateCanvas.getScene().getHeightTileCount() + " Tile: " + mateCanvas.getScene().getTileWidth() + "px", 0, Gdx.graphics.getHeight() - 15);
+        font.draw(batch, "Current Scene: " + mateCanvas.getCurrentScene().getSceneName(), 0, Gdx.graphics.getHeight());
+        font.draw(batch, "Scene Size : " + mateCanvas.getCurrentScene().getWidthTileCount() + " X " + mateCanvas.getCurrentScene().getHeightTileCount() + " Tile: " + mateCanvas.getCurrentScene().getTileWidth() + "px", 0, Gdx.graphics.getHeight() - 15);
         batch.end();
 
         shapeRenderer.setProjectionMatrix(camera.combined);
@@ -92,7 +92,7 @@ public class MateEngine extends Game {
 
         shapeRenderer.setProjectionMatrix(mateCanvas.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(0, 0, mateCanvas.getScene().getSceneWidth(), mateCanvas.getScene().getSceneHeight());
+        shapeRenderer.rect(0, 0, mateCanvas.getCurrentScene().getSceneWidth(), mateCanvas.getCurrentScene().getSceneHeight());
 
         if (DEBUG) {
             debugRenderer();

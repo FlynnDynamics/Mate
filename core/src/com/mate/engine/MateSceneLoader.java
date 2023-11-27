@@ -1,12 +1,14 @@
 package com.mate.engine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import scene.Scene;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import screen.MateCanvas;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,10 +21,10 @@ import java.util.Map;
 public class MateSceneLoader {
     private Map<String, Map<Integer, Map<String, Map<String, String>>>> tilesetData;
 
-    public Scene getScene(String fileName) throws ParserConfigurationException, IOException, SAXException {
+    public Scene getScene(String fileName, Stage sceneStage) throws ParserConfigurationException, IOException, SAXException {
         if (!Gdx.files.internal("Scenes/" + fileName).exists())
             return null;
-        return new Scene(fileName, this);
+        return new Scene(fileName, sceneStage, this);
     }
 
     public MateSceneLoader() throws ParserConfigurationException, IOException, SAXException {

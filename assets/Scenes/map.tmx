@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="42">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="43">
  <properties>
   <property name="ambientlight" type="color" value="#ff686868"/>
  </properties>
@@ -7,7 +7,7 @@
  <tileset firstgid="25" source="../TileSets/Hextiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="5">
   <data encoding="csv">
-22,3221225494,1073741846,3221225494,22,1073741846,3221225494,1073741846,3221225494,22,
+54,3221225494,1073741846,3221225494,22,1073741846,3221225494,1073741846,3221225494,22,
 3221225494,3221225494,3221225494,22,3221225494,2147483670,3221225494,1073741846,22,3221225494,
 1073741846,22,1073741846,1073741846,2147483670,3221225494,2147483670,3221225494,22,1073741846,
 2147483670,3221225494,2147483670,22,3221225494,3221225494,3221225494,3221225494,3221225494,2147483670,
@@ -33,7 +33,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="39" gid="71" x="1627.55" y="1520.19" width="894" height="1190">
+  <object id="39" gid="71" x="1630.82" y="1514.74" width="894" height="1190">
    <properties>
     <property name="animation" value="Tree01"/>
     <property name="animationfirststate" value="animation"/>
@@ -44,13 +44,13 @@
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="40" type="pointlight" x="1605" y="625.81" width="1470" height="1167.6">
+  <object id="40" type="pointlight" x="1677" y="453.81" width="1470" height="1167.6">
    <properties>
     <property name="cast" type="bool" value="true"/>
     <property name="color" type="color" value="#ff00ffff"/>
    </properties>
    <ellipse/>
   </object>
+  <object id="42" gid="59" x="2759.29" y="786.483" width="600" height="376" rotation="263.633"/>
  </objectgroup>
- <objectgroup id="3" name="Object Layer 2"/>
 </map>
