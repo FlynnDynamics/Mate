@@ -17,7 +17,7 @@ public class SceneObject extends Actor {
 
     private boolean object;
     private int id;
-
+//Test
     private boolean spriteShadow;
     private ShadowObject shadowObject;
 
