@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mate.engine.MateEngine;
 import engineobjects.ShadowObject;
 import engineobjects.SpineObject;
 import enums.ShadowType;
@@ -17,7 +16,7 @@ public class SceneObject extends Actor {
 
     private boolean object;
     private int id;
-//Test
+
     private boolean spriteShadow;
     private ShadowObject shadowObject;
 
@@ -58,22 +57,19 @@ public class SceneObject extends Actor {
         }
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public void drawShadow(Batch batch, float parentAlpha) {
         if (spriteShadow) {
             Vector2 tmp = new Vector2(this.getX(), this.getY());
             shadowObject.createShadow(ShadowType.TYPE_1, tmp, batch);
         }
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
         if (spineObject != null)
             spineObject.render(batch);
         else
             sprite.draw(batch, parentAlpha);
-
-        if (object && MateEngine.DEBUG) {
-            batch.end();
-            MateEngine.addDebugDraw(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-            batch.begin();
-        }
     }
 
     @Override

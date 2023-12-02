@@ -1,10 +1,8 @@
 package scene;
 
-import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -22,6 +20,7 @@ import org.xml.sax.SAXException;
 import screen.MateCanvas;
 
 import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,23 +42,30 @@ public class Scene {
     private World world;
     private RayHandler globalHandler;
 
-    private Array<PointLight> castLights;
+    private Array<LightObject> castLights;
     private Array<LightObject> staticLights;
+
     private Map<String, TextureAtlas> atlasMap;
 
     private int widthTileCount, heightTileCount;
     private int tileWidth, tileHeight;
     private int sceneWidth, sceneHeight;
-    private Color ambientColor;
+
+    private DayCycleLight dayCycleLight;
 
     private float time;
 
     public void render() {
-        time += Gdx.graphics.getDeltaTime();
+        time += Gdx.graphics.getDeltaTime() * 30;
 
         if (time > 1440.0f)
             time = 0;
+        if (dayCycleLight != null) {
+            dayCycleLight.calculateCyclePosition(time);
+            globalHandler.setAmbientLight(dayCycleLight.getCycleColor(time));
+        }
 
+        sceneStage.getViewport().apply();
         sceneStage.act();
         sceneStage.draw();
 
@@ -87,7 +93,14 @@ public class Scene {
         sceneWidth = widthTileCount * tileWidth;
         sceneHeight = heightTileCount * tileHeight;
 
-        ambientColor = new Color(MateEngine.convertColor((Long.parseLong(propertyMap.get("ambientlight").replace("#", ""), 16))));
+        if (propertyMap.containsKey("daycyclelight") && propertyMap.get("daycyclelight").equals("true")) {
+            dayCycleLight = new DayCycleLight(this, new Vector2(sceneWidth / 2, sceneHeight / 2), 100000f, 1440.0f);
+            dayCycleLight.getCycleColors()[0] = new Color(MateEngine.convertColor((Long.parseLong(propertyMap.get("0").replace("#", ""), 16))));
+            dayCycleLight.getCycleColors()[1] = new Color(MateEngine.convertColor((Long.parseLong(propertyMap.get("1").replace("#", ""), 16))));
+            dayCycleLight.getCycleColors()[2] = new Color(MateEngine.convertColor((Long.parseLong(propertyMap.get("2").replace("#", ""), 16))));
+            dayCycleLight.getCycleColors()[3] = new Color(MateEngine.convertColor((Long.parseLong(propertyMap.get("3").replace("#", ""), 16))));
+        } else
+            globalHandler.setAmbientLight(new Color(MateEngine.convertColor((Long.parseLong(propertyMap.get("ambientlight").replace("#", ""), 16)))));
     }
 
     private void init() throws ParserConfigurationException, IOException, SAXException {
@@ -105,8 +118,6 @@ public class Scene {
         Document document = mateSceneLoader.readXmlDocument("Scenes/" + sceneName);
         NodeList nodeList = document.getChildNodes();
         configureScene(nodeList);
-
-        globalHandler.setAmbientLight(ambientColor);
 
         for (int i = 0; i < nodeList.item(0).getChildNodes().getLength(); i++) {
             String nodeName = nodeList.item(0).getChildNodes().item(i).getNodeName();
@@ -307,11 +318,7 @@ public class Scene {
         return sceneHeight;
     }
 
-    public Color getAmbientColor() {
-        return ambientColor;
-    }
-
-    public Array<PointLight> getCastLights() {
+    public Array<LightObject> getCastLights() {
         return castLights;
     }
 
@@ -329,6 +336,10 @@ public class Scene {
 
     public World getWorld() {
         return world;
+    }
+
+    public void setTime(float time) {
+        this.time = time;
     }
 
     public float getTime() {

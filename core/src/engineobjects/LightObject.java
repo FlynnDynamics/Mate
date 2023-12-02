@@ -3,6 +3,7 @@ package engineobjects;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.mate.engine.MateEngine;
 import scene.Scene;
 
@@ -10,12 +11,17 @@ import java.util.Map;
 import java.util.Random;
 
 public class LightObject {
-    private final Scene scene;
-    private PointLight pointLight;
+    protected final Scene scene;
+    protected PointLight pointLight;
 
-    private Color color;
-    private boolean cast;
-    private float x, y, distance;
+    protected Color color;
+    protected boolean cast, active;
+    protected Vector2 position;
+    protected float distance;
+
+    public LightObject(Scene scene) {
+        this.scene = scene;
+    }
 
     public LightObject(Scene scene, Map<String, String> propertyMap) {
         this.scene = scene;
@@ -37,30 +43,28 @@ public class LightObject {
     }
 
     public void createStaticLight(float x, float y, float width, float height) {
-        this.x = x + width / 2;
-        this.y = scene.getSceneHeight() - (y + height / 2);
-        pointLight = new PointLight(scene.getGlobalHandler(), 150, color, width / 2, this.x, this.y);
+        position = new Vector2(x + width / 2, scene.getSceneHeight() - (y + height / 2));
+        distance = width / 2;
+        pointLight = new PointLight(scene.getGlobalHandler(), 150, color, distance, position.x, position.y);
         pointLight.setStaticLight(true);
         pointLight.setXray(true);
 
         if (cast)
-            scene.getCastLights().add(pointLight);
+            scene.getCastLights().add(this);
         scene.getStaticLights().add(this);
     }
 
     public void createObjectLight(float x, float y) {
-        this.x = x;
-        this.y = y;
-
-        pointLight = new PointLight(scene.getGlobalHandler(), 150, color, distance, this.x, this.y);
+        position = new Vector2(x, y);
+        pointLight = new PointLight(scene.getGlobalHandler(), 150, color, distance, position.x, position.y);
 
         if (cast)
-            scene.getCastLights().add(pointLight);
+            scene.getCastLights().add(this);
     }
 
-    private boolean shake, wobble, pulse;
-    private Random random;
-    private float timeS, timeW, timeP;
+    protected boolean shake, wobble, pulse;
+    protected Random random;
+    protected float timeS, timeW, timeP;
 
     public void update() {
         if (shake)
@@ -68,12 +72,11 @@ public class LightObject {
                 timeS = 0;
                 if (random == null)
                     random = new Random();
-                float x = random.nextFloat(this.x, this.x + 10);
-                float y = random.nextFloat(this.y, this.y + 10);
+                float x = random.nextFloat(position.x, position.x + 10);
+                float y = random.nextFloat(position.y, position.y + 10);
                 pointLight.setPosition(x, y);
             } else
                 timeS += Gdx.graphics.getDeltaTime();
-
         if (wobble)
             if (timeW > 0.1f) {
                 timeW = 0;
@@ -83,24 +86,91 @@ public class LightObject {
                 pointLight.setDistance(d);
             } else
                 timeW += Gdx.graphics.getDeltaTime();
-
         if (pulse)
             if (timeP > 0.1f) {
                 timeP = 0;
                 //Pulse Code
             } else
                 timeP += Gdx.graphics.getDeltaTime();
-
     }
 
     public void setColor(Color color) {
         this.color = color;
-        pointLight.setColor(color);
+        if (pointLight != null)
+            pointLight.setColor(color);
     }
 
-    public void setPosition(float x, float y) {
-        this.x = x;
-        this.y = y;
-        pointLight.setPosition(x, y);
+    public void setPosition(Vector2 position) {
+        this.position = position;
+        if (pointLight != null)
+            pointLight.setPosition(position.x, position.y);
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+        if (pointLight != null)
+            pointLight.setDistance(distance);
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        if (pointLight != null)
+            pointLight.setActive(active);
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public boolean isCast() {
+        return cast;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public PointLight getPointLight() {
+        return pointLight;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public boolean isShake() {
+        return shake;
+    }
+
+    public boolean isWobble() {
+        return wobble;
+    }
+
+    public boolean isPulse() {
+        return pulse;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public float getTimeS() {
+        return timeS;
+    }
+
+    public float getTimeW() {
+        return timeW;
+    }
+
+    public float getTimeP() {
+        return timeP;
+    }
+
+    public float getDistance() {
+        return distance;
     }
 }

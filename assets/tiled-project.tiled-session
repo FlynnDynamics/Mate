@@ -5,9 +5,9 @@
     },
     "activeFile": "Scenes/map.tmx",
     "expandedProjectPaths": [
+        "TileSets",
         "Scenes",
-        ".",
-        "TileSets"
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -37,10 +37,10 @@
         },
         "Scenes/map.tmx": {
             "scale": 0.25,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 3290,
-                "y": 1168
+                "x": 1794,
+                "y": 1144
             }
         },
         "TEST.tsx": {
@@ -149,7 +149,7 @@
         "TileSets/Hextiles.tsx"
     ],
     "project": "tiled-project.tiled-project",
-    "property.type": "float",
+    "property.type": "bool",
     "recentFiles": [
         "TileSets/Hextiles.tsx",
         "TileSets/Grass.tsx",

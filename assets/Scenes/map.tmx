@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="43">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="7" nextobjectid="55">
  <properties>
+  <property name="0" type="color" value="#ff1a1a4c"/>
+  <property name="1" type="color" value="#ffff8000"/>
+  <property name="2" type="color" value="#ffffffff"/>
+  <property name="3" type="color" value="#ff994d00"/>
   <property name="ambientlight" type="color" value="#ff686868"/>
+  <property name="daycyclelight" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../TileSets/Grass.tsx"/>
  <tileset firstgid="25" source="../TileSets/Hextiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="5">
   <data encoding="csv">
-54,3221225494,1073741846,3221225494,22,1073741846,3221225494,1073741846,3221225494,22,
+22,22,1073741846,3221225494,22,1073741846,3221225494,1073741846,3221225494,22,
 3221225494,3221225494,3221225494,22,3221225494,2147483670,3221225494,1073741846,22,3221225494,
 1073741846,22,1073741846,1073741846,2147483670,3221225494,2147483670,3221225494,22,1073741846,
 2147483670,3221225494,2147483670,22,3221225494,3221225494,3221225494,3221225494,3221225494,2147483670,
-3221225494,22,3221225494,22,3221225494,2147483670,3221225494,2147483670,3221225494,2147483670
+3221225494,1073741846,3221225494,22,3221225494,2147483670,3221225494,2147483670,3221225494,2147483670
 </data>
  </layer>
- <objectgroup id="2" name="Object Layer 1">
-  <object id="37" gid="71" x="3245" y="1945" width="894" height="1190">
+ <objectgroup id="5" name="Object Layer 3">
+  <object id="51" gid="71" x="2231" y="1491.26" width="836.514" height="1113.48">
    <properties>
     <property name="animation" value="Tree01"/>
     <property name="animationfirststate" value="animation"/>
     <property name="masky" type="float" value="70"/>
-    <property name="offsety" type="float" value="70"/>
+    <property name="offsety" type="float" value="40"/>
     <property name="originoffsetx" type="float" value="50"/>
     <property name="originoffsety" type="float" value="-550"/>
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="38" type="pointlight" x="3222.45" y="1050.62" width="1470" height="1167.6">
-   <properties>
-    <property name="cast" type="bool" value="true"/>
-    <property name="color" type="color" value="#ff00ffff"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="39" gid="71" x="1630.82" y="1514.74" width="894" height="1190">
+  <object id="52" gid="71" x="3181.74" y="1511.26" width="536.514" height="714.151">
    <properties>
     <property name="animation" value="Tree01"/>
     <property name="animationfirststate" value="animation"/>
     <property name="masky" type="float" value="70"/>
-    <property name="offsety" type="float" value="70"/>
+    <property name="offsety" type="float" value="40"/>
     <property name="originoffsetx" type="float" value="50"/>
     <property name="originoffsety" type="float" value="-550"/>
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="40" type="pointlight" x="1677" y="453.81" width="1470" height="1167.6">
+  <object id="53" gid="71" x="2545.74" y="2147.26" width="605.126" height="805.48">
    <properties>
-    <property name="cast" type="bool" value="true"/>
-    <property name="color" type="color" value="#ff00ffff"/>
+    <property name="animation" value="Tree01"/>
+    <property name="animationfirststate" value="animation"/>
+    <property name="masky" type="float" value="70"/>
+    <property name="offsety" type="float" value="40"/>
+    <property name="originoffsetx" type="float" value="50"/>
+    <property name="originoffsety" type="float" value="-550"/>
+    <property name="spriteshadow" type="bool" value="true"/>
    </properties>
-   <ellipse/>
   </object>
-  <object id="42" gid="59" x="2759.29" y="786.483" width="600" height="376" rotation="263.633"/>
  </objectgroup>
 </map>

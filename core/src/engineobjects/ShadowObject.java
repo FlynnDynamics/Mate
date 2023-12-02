@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.crashinvaders.vfx.framebuffer.VfxFrameBuffer;
 import com.mate.engine.MateEngine;
 import enums.ShadowType;
+import scene.DayCycleLight;
 import scene.SceneObject;
 import screen.MateCanvas;
 
@@ -28,16 +29,17 @@ public class ShadowObject {
 
     public void createShadow(ShadowType shadowType, Vector2 position, Batch batch) {
         //-----------------
-        for (PointLight light : sceneObject.getSceneLayer().getScene().getCastLights())
+        for (LightObject light : sceneObject.getSceneLayer().getScene().getCastLights())
             if (shadowType.equals(ShadowType.TYPE_1))
                 createType_1(position, light, batch);
             else if (shadowType.equals(ShadowType.TYPE_2))
                 createType_2(position, light, batch);
+
         //-----------------
     }
 
-    private void createType_1(Vector2 position, PointLight light, Batch batch) {
-        Vector3 distVec = MateEngine.getDistance(new Vector2(light.getX(), light.getY()), sceneObject.getCenterPosition());
+    private void createType_1(Vector2 position, LightObject light, Batch batch) {
+        Vector3 distVec = MateEngine.getDistance(light.position, sceneObject.getCenterPosition());
         //-----------------
         float degree = MateEngine.getDegree(distVec.x, distVec.y);
         float distance = distVec.z;
@@ -66,13 +68,21 @@ public class ShadowObject {
         centerX += originOffsetX;
         centerY += originOffsetY;
         //-----------------
-        float scaleY = 2f - (float) Math.exp(-distance / light.getDistance());
+        float scaleY;
+        if (light instanceof DayCycleLight) {
+            scaleY = 2f - MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor());
+        } else
+            scaleY = 2f - (float) Math.exp(-distance / light.getDistance());
         float scaleX = 0.7f / scaleY;
         //-----------------
         Vector3 vp = MateCanvas.sceneCamera.project(new Vector3(position.x, position.y, 0));
         //-----------------
         batch.setProjectionMatrix(MateEngine.getNoProjection());
-        batch.setColor(new Color(0, 0, 0, 1));
+        if (light instanceof DayCycleLight) {
+            System.out.println(MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor()));
+            batch.setColor(new Color(0, 0, 0, MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor())));
+        } else
+            batch.setColor(new Color(0, 0, 0, 0.6f));
         batch.draw(region, vp.x + 0 * (1 / MateCanvas.sceneCamera.zoom), vp.y + offsetY * (1 / MateCanvas.sceneCamera.zoom), centerX * (1 / MateCanvas.sceneCamera.zoom), centerY * (1 / MateCanvas.sceneCamera.zoom), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), scaleX, scaleY, degree + 90);
         batch.setColor(Color.WHITE);
         batch.setProjectionMatrix(MateCanvas.sceneCamera.combined);
@@ -80,7 +90,7 @@ public class ShadowObject {
 
     }
 
-    private void createType_2(Vector2 position, PointLight light, Batch batch) {
+    private void createType_2(Vector2 position, LightObject light, Batch batch) {
 
     }
 

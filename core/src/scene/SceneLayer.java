@@ -36,7 +36,12 @@ public class SceneLayer extends Group {
             for (ParticleObject particleObject : particleObjects)
                 particleObject.render(batch, Gdx.graphics.getDeltaTime());
 
+        for (Actor actor : this.getChildren())
+            if (actor instanceof SceneObject)
+                ((SceneObject) actor).drawShadow(batch, parentAlpha);
+
         super.draw(batch, parentAlpha);
+
     }
 
     public void addParticle(Map<String, String> attributeMap, Map<String, String> propertyMap) {
