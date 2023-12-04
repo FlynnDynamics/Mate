@@ -1,8 +1,8 @@
-package scene;
+package engineobjects.lights;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import engineobjects.LightObject;
+import scene.Scene;
 
 public class DayCycleLight extends LightObject {
 
@@ -54,15 +54,6 @@ public class DayCycleLight extends LightObject {
         }
 
         return currentColor;
-    }
-
-    @Override
-    public float getDistance() {
-        return super.getDistance();
-    }
-
-    public void setCenter(Vector2 center) {
-        this.center = center;
     }
 
     public Color[] getCycleColors() {

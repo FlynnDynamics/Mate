@@ -13,27 +13,7 @@ public class MateExceptions extends Exception {
     }
 
     public synchronized static void propertyMapException(Map<String, String> propertyMap, Class c) {
-        propertyMap.put("distance", "0");
-        propertyMap.put("color", "#ffffff00");
-        propertyMap.put("cast", "false");
 
-        propertyMap.put("spriteshadow", "false");
-        propertyMap.put("shadowoffsetx", "0");
-        propertyMap.put("shadowoffsety", "0");
-
-        propertyMap.put("ambientlight", "#ffffff00");
-
-        String err = "";
-
-        err += "PROPERTY_MAP_EXCEPTION at class:\n";
-        err += c.getName() + " at method:\n";
-        err += c.getEnclosingMethod().getName() + "\n";
-        err += "--> set propertyMap to default values. please check tilded properties.\n";
-        err += "----------- \n";
-
-        System.err.println(err);
-
-        jOption(err);
     }
 
 }

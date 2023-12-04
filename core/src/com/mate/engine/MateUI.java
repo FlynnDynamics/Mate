@@ -1,11 +1,11 @@
 package com.mate.engine;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
+import com.ray3k.stripe.scenecomposer.SceneComposerStageBuilder;
 import screen.MateCanvas;
 
 public class MateUI {
@@ -21,9 +21,6 @@ public class MateUI {
 
     protected Skin skin;
 
-    private Table table;
-    private Label labelFPS, labelTICK, labelPOS, labelZOOM;
-    private Slider slider;
 
     public void create() {
         Gdx.input.setInputProcessor(stage);
@@ -37,27 +34,13 @@ public class MateUI {
         });
 
         skin = new Skin(Gdx.files.internal("UI/metal/metal-ui.json"));
+        SceneComposerStageBuilder builder = new SceneComposerStageBuilder();
+        builder.build(stage, skin, Gdx.files.internal("UI/metal/mate.json"));
 
-        table = new Table();
-        table.setFillParent(true);
-        table.align(Align.bottom);
-        stage.addActor(table);
-
-        labelFPS = new Label("", skin, "font", "white");
-        labelFPS.setFontScale(1.5f);
-        addElement(labelFPS);
-
-        labelPOS = new Label("", skin, "font", "white");
-        labelPOS.setFontScale(1.5f);
-        addElement(labelPOS);
-
-        labelZOOM = new Label("", skin, "font", "white");
-        labelZOOM.setFontScale(1.5f);
-        addElement(labelZOOM);
-
-
-        slider = new Slider(0, 1440, 5, false, skin);
-        slider.addListener(new ChangeListener() {
+        Slider tickSlider = stage.getRoot().findActor("tick_slider");
+        tickSlider.setStepSize(5);
+        tickSlider.setRange(0, 1440);
+        tickSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Slider slider = (Slider) actor;
@@ -65,25 +48,26 @@ public class MateUI {
             }
         });
 
-        labelTICK = new Label("", skin, "font", "white");
-        labelTICK.setFontScale(1.5f);
-        SplitPane splitPane = new SplitPane(slider, labelTICK, false, skin);
-        table.add(splitPane).expandX().left().pad(5);
+        CheckBox checkBox = stage.getRoot().findActor("tick_box");
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                CheckBox checkBox = (CheckBox) actor;
+                mateCanvas.getCurrentScene().setTimeTick(checkBox.isChecked());
+            }
+        });
 
-    }
-
-    public void addElement(Widget element) {
-        table.add(element).expandX().left().pad(5);
-        table.row();
     }
 
 
     public void render() {
-        labelTICK.setText(String.format("%-6s %d", " TICK:", Math.round(mateCanvas.getCurrentScene().getTime())));
-        labelFPS.setText(String.format("%-6s %d", "FPS:", Gdx.graphics.getFramesPerSecond()));
-        Vector3 pos = MateCanvas.sceneCamera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-        labelPOS.setText("POS: " + pos.x + " | " + pos.y);
-        labelZOOM.setText(String.format("%-5s %f", "ZOOM:", MateCanvas.sceneCamera.zoom));
+        Label scene = stage.getRoot().findActor("scene");
+        scene.setText("current scene: " + mateCanvas.getCurrentScene().getSceneName());
+        Label fps = stage.getRoot().findActor("fps");
+        fps.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
+        Label tick = stage.getRoot().findActor("tick");
+        tick.setText("TICK: " + MathUtils.round(mateCanvas.getCurrentScene().getTime()));
+
 
         stage.getViewport().apply();
         stage.act();

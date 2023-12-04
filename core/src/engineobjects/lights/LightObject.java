@@ -1,4 +1,4 @@
-package engineobjects;
+package engineobjects.lights;
 
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +15,7 @@ public class LightObject {
     protected PointLight pointLight;
 
     protected Color color;
-    protected boolean cast, active;
+    protected boolean cast, active, cycle;
     protected Vector2 position;
     protected float distance;
 
@@ -30,6 +30,8 @@ public class LightObject {
 
     private void init(Map<String, String> propertyMap) {
         cast = Boolean.parseBoolean(propertyMap.get("cast"));
+        cycle = Boolean.parseBoolean(propertyMap.get("cycle"));
+
         color = MateEngine.convertColor(Long.parseLong(propertyMap.get("color").replace("#", ""), 16));
 
         if (propertyMap.containsKey("shake"))
@@ -92,30 +94,40 @@ public class LightObject {
                 //Pulse Code
             } else
                 timeP += Gdx.graphics.getDeltaTime();
+        if (cycle)
+            setColor(new Color(color.r, color.g, color.b, 1 - MateEngine.calculateLuminance(scene.getDayCycleLight().getCurrentColor())));
     }
 
     public void setColor(Color color) {
         this.color = color;
-        if (pointLight != null)
+        if (pointLight != null) {
             pointLight.setColor(color);
+            pointLight.update();
+        }
     }
 
     public void setPosition(Vector2 position) {
         this.position = position;
-        if (pointLight != null)
+        if (pointLight != null) {
             pointLight.setPosition(position.x, position.y);
+            pointLight.update();
+        }
     }
 
     public void setDistance(float distance) {
         this.distance = distance;
-        if (pointLight != null)
+        if (pointLight != null) {
             pointLight.setDistance(distance);
+            pointLight.update();
+        }
     }
 
     public void setActive(boolean active) {
         this.active = active;
-        if (pointLight != null)
+        if (pointLight != null) {
             pointLight.setActive(active);
+            update();
+        }
     }
 
     public Vector2 getPosition() {

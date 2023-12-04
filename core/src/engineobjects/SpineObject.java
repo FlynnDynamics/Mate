@@ -27,7 +27,6 @@ public class SpineObject {
         skeleton.setScale(sceneObject.getResScale().x, sceneObject.getResScale().y);
         AnimationStateData stateData = new AnimationStateData(skeleton.getData());
         setPosition(sceneObject.getX(), sceneObject.getY());
-
         animationState = new AnimationState(stateData);
         animationState.setAnimation(0, firstState, true);
     }
@@ -47,6 +46,26 @@ public class SpineObject {
     public void setPosition(float x, float y) {
         skeleton.setPosition(x - skeleton.getData().getX() * sceneObject.getResScale().x, y - skeleton.getData().getY() * sceneObject.getResScale().y);
         skeleton.updateWorldTransform();
+    }
+
+    public boolean isFlipedX() {
+        if (skeleton.getScaleX() < 0)
+            return true;
+        return false;
+    }
+
+    public boolean isFlipedY() {
+        if (skeleton.getScaleY() < 0)
+            return true;
+        return false;
+    }
+
+    public void setFlip(boolean x, boolean y) {
+        if (x)
+            skeleton.setScaleX(skeleton.getScaleX() * -1);
+        if (y) {
+            skeleton.setScaleY(skeleton.getScaleY() * -1);
+        }
     }
 
     public void dispose() {

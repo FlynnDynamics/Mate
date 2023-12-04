@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "cc/qNNhuOnM",
+	"hash": "jY7oHVXOwUE",
 	"spine": "4.1.24",
 	"x": -502.04,
 	"y": -9.67,
@@ -85,44 +85,28 @@
 				"shear": [
 					{},
 					{ "time": 1.6667, "x": -1 },
-					{ "time": 4, "x": 1 },
-					{ "time": 5 }
+					{ "time": 3.3333 }
 				]
 			},
 			"bone2": {
 				"shear": [
 					{},
 					{ "time": 1.6667, "x": -3.36 },
-					{ "time": 4, "x": -0.21 },
-					{ "time": 5 }
+					{ "time": 3.3333 }
 				]
 			},
 			"bone8": {
-				"rotate": [
-					{},
-					{ "time": 4, "value": 1.41 },
-					{ "time": 5 }
-				],
 				"shear": [
 					{ "y": 5 },
 					{ "time": 1.6667, "y": 3 },
-					{ "time": 4, "y": 8.13 },
-					{ "time": 5, "y": 5 }
+					{ "time": 3.3333, "y": 5 }
 				]
 			},
 			"bone6": {
 				"rotate": [
 					{},
 					{ "time": 1.6667, "value": -2.3 },
-					{ "time": 4, "value": 0.7 },
-					{ "time": 5 }
-				]
-			},
-			"bone4": {
-				"rotate": [
-					{},
-					{ "time": 2.3333, "value": -2.68 },
-					{ "time": 4.3333 }
+					{ "time": 3.3333 }
 				]
 			}
 		}

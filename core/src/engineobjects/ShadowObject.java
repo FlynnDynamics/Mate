@@ -1,6 +1,5 @@
 package engineobjects;
 
-import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
@@ -12,13 +11,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.crashinvaders.vfx.framebuffer.VfxFrameBuffer;
 import com.mate.engine.MateEngine;
+import engineobjects.lights.LightObject;
 import enums.ShadowType;
-import scene.DayCycleLight;
+import engineobjects.lights.DayCycleLight;
 import scene.SceneObject;
 import screen.MateCanvas;
 
 public class ShadowObject {
-    private SceneObject sceneObject;
+    private final SceneObject sceneObject;
     private VfxFrameBuffer vfxFrameBuffer;
 
     private float originOffsetX, originOffsetY, offsetY, maskY;
@@ -39,7 +39,7 @@ public class ShadowObject {
     }
 
     private void createType_1(Vector2 position, LightObject light, Batch batch) {
-        Vector3 distVec = MateEngine.getDistance(light.position, sceneObject.getCenterPosition());
+        Vector3 distVec = MateEngine.getDistance(light.getPosition(), sceneObject.getCenterPosition());
         //-----------------
         float degree = MateEngine.getDegree(distVec.x, distVec.y);
         float distance = distVec.z;
@@ -47,15 +47,23 @@ public class ShadowObject {
         if (distance >= light.getDistance())
             return;
         //-----------------
-        Texture texture = getTexture(position, batch);
+        Texture texture;
+        if (degree < 270 && degree > -90)
+            texture = getTexture(position, batch, true);
+        else
+            texture = getTexture(position, batch, false);
+
         TextureRegion region = new TextureRegion(texture);
         region.flip(false, true);
         //-----------------
         float centerX = sceneObject.getWidth() / (2 * MateCanvas.sceneCamera.viewportWidth / Gdx.graphics.getWidth());
         float centerY = sceneObject.getHeight() / (2 * MateCanvas.sceneCamera.viewportHeight / Gdx.graphics.getHeight());
         //-----------------
+
         float originOffsetX = this.originOffsetX * sceneObject.getResScale().x;
         float originOffsetY = this.originOffsetY * sceneObject.getResScale().y;
+
+
         float offsetY = this.offsetY * sceneObject.getResScale().y;
         //-----------------
         if (sceneObject.getSprite().isFlipX() && sceneObject.getSpineObject() == null)
@@ -70,19 +78,20 @@ public class ShadowObject {
         //-----------------
         float scaleY;
         if (light instanceof DayCycleLight) {
-            scaleY = 2f - MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor());
+            scaleY = 1.8f - MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor());
         } else
-            scaleY = 2f - (float) Math.exp(-distance / light.getDistance());
+            scaleY = 1.8f - (float) Math.exp(-distance / light.getDistance());
         float scaleX = 0.7f / scaleY;
         //-----------------
         Vector3 vp = MateCanvas.sceneCamera.project(new Vector3(position.x, position.y, 0));
         //-----------------
         batch.setProjectionMatrix(MateEngine.getNoProjection());
         if (light instanceof DayCycleLight) {
-            System.out.println(MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor()));
             batch.setColor(new Color(0, 0, 0, MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor())));
         } else
             batch.setColor(new Color(0, 0, 0, 0.6f));
+
+
         batch.draw(region, vp.x + 0 * (1 / MateCanvas.sceneCamera.zoom), vp.y + offsetY * (1 / MateCanvas.sceneCamera.zoom), centerX * (1 / MateCanvas.sceneCamera.zoom), centerY * (1 / MateCanvas.sceneCamera.zoom), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), scaleX, scaleY, degree + 90);
         batch.setColor(Color.WHITE);
         batch.setProjectionMatrix(MateCanvas.sceneCamera.combined);
@@ -96,13 +105,16 @@ public class ShadowObject {
 
     private MaskObject maskObject;
 
-    private Texture getTexture(Vector2 position, Batch batch) {
+    private Texture getTexture(Vector2 position, Batch batch, boolean flip) {
+
         if (vfxFrameBuffer == null)
             initFrameBuffer();
         //-----------------
         batch.end();
         //-----------------
         Vector2 screenOrigin = MateCanvas.getScreenOrigin();
+        if (flip)
+            sceneObject.flipX();
         sceneObject.setPosition(screenOrigin.x, screenOrigin.y);
         //-----------------
         vfxFrameBuffer.begin();
@@ -125,6 +137,8 @@ public class ShadowObject {
         vfxFrameBuffer.end();
         //-----------------
         sceneObject.setPosition(position.x, position.y);
+        if (flip)
+            sceneObject.flipX();
         //-----------------
         batch.begin();
         //-----------------
@@ -141,6 +155,7 @@ public class ShadowObject {
         if (maskObject != null)
             maskObject.dispose();
     }
+
 
     public void setOriginOffsetX(float originOffsetX) {
         this.originOffsetX = originOffsetX;

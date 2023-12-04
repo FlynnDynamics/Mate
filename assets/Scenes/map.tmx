@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="7" nextobjectid="55">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="512" infinite="0" nextlayerid="7" nextobjectid="69">
  <properties>
-  <property name="0" type="color" value="#ff1a1a4c"/>
+  <property name="0" type="color" value="#ff25256b"/>
   <property name="1" type="color" value="#ffff8000"/>
   <property name="2" type="color" value="#ffffffff"/>
-  <property name="3" type="color" value="#ff994d00"/>
+  <property name="3" type="color" value="#ffff8000"/>
   <property name="ambientlight" type="color" value="#ff686868"/>
   <property name="daycyclelight" type="bool" value="true"/>
  </properties>
@@ -20,38 +20,27 @@
 </data>
  </layer>
  <objectgroup id="5" name="Object Layer 3">
-  <object id="51" gid="71" x="2231" y="1491.26" width="836.514" height="1113.48">
+  <object id="64" gid="59" x="1440" y="1761" width="600" height="376"/>
+  <object id="66" gid="71" x="1181" y="1407" width="894" height="1190">
    <properties>
     <property name="animation" value="Tree01"/>
     <property name="animationfirststate" value="animation"/>
     <property name="masky" type="float" value="70"/>
-    <property name="offsety" type="float" value="40"/>
-    <property name="originoffsetx" type="float" value="50"/>
+    <property name="offsety" type="float" value="60"/>
+    <property name="originoffsetx" type="float" value="60"/>
     <property name="originoffsety" type="float" value="-550"/>
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="52" gid="71" x="3181.74" y="1511.26" width="536.514" height="714.151">
+  <object id="67" gid="71" x="2421" y="1397" width="894" height="1190">
    <properties>
-    <property name="animation" value="Tree01"/>
-    <property name="animationfirststate" value="animation"/>
     <property name="masky" type="float" value="70"/>
-    <property name="offsety" type="float" value="40"/>
-    <property name="originoffsetx" type="float" value="50"/>
+    <property name="offsety" type="float" value="60"/>
+    <property name="originoffsetx" type="float" value="60"/>
     <property name="originoffsety" type="float" value="-550"/>
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="53" gid="71" x="2545.74" y="2147.26" width="605.126" height="805.48">
-   <properties>
-    <property name="animation" value="Tree01"/>
-    <property name="animationfirststate" value="animation"/>
-    <property name="masky" type="float" value="70"/>
-    <property name="offsety" type="float" value="40"/>
-    <property name="originoffsetx" type="float" value="50"/>
-    <property name="originoffsety" type="float" value="-550"/>
-    <property name="spriteshadow" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="68" gid="59" x="2684" y="1744" width="600" height="376"/>
  </objectgroup>
 </map>

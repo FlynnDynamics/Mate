@@ -11,10 +11,10 @@ import enums.ShadowType;
 import java.util.Map;
 
 public class SceneObject extends Actor {
-    private SceneLayer sceneLayer;
-    private Sprite sprite;
+    private final SceneLayer sceneLayer;
+    private final Sprite sprite;
 
-    private boolean object;
+    private final boolean object;
     private int id;
 
     private boolean spriteShadow;
@@ -103,6 +103,12 @@ public class SceneObject extends Actor {
             spineObject.setPosition(x, y);
     }
 
+    public void flipX() {
+        sprite.flip(true, false);
+        if (spineObject != null)
+            spineObject.setFlip(true, false);
+    }
+
     public Vector2 getCenterPosition() {
         return new Vector2((this.getX() + this.getWidth() / 2), (this.getY() + this.getHeight() / 2));
     }
@@ -118,6 +124,7 @@ public class SceneObject extends Actor {
         if (shadowObject != null)
             shadowObject.dispose();
     }
+
 
     public Sprite getSprite() {
         return sprite;

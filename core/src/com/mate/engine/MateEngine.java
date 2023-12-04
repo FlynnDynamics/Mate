@@ -93,8 +93,8 @@ public class MateEngine extends Game {
 
         float a = 0.2126f * red + 0.7152f * green + 0.0722f * blue;
 
-        if (a <= 0.1f)
-            return 0.1f;
+        if (a <= 0.2f)
+            return 0f;
         else if (a >= 0.6f)
             return 0.6f;
         return a;

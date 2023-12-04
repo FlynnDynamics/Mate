@@ -12,7 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mate.engine.MateEngine;
 import com.mate.engine.MateSceneLoader;
-import engineobjects.LightObject;
+import engineobjects.lights.DayCycleLight;
+import engineobjects.lights.LightObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -54,9 +55,11 @@ public class Scene {
     private DayCycleLight dayCycleLight;
 
     private float time;
+    private boolean timeTick;
 
     public void render() {
-        time += Gdx.graphics.getDeltaTime() * 30;
+        if (timeTick)
+            time += Gdx.graphics.getDeltaTime();
 
         if (time > 1440.0f)
             time = 0;
@@ -68,6 +71,9 @@ public class Scene {
         sceneStage.getViewport().apply();
         sceneStage.act();
         sceneStage.draw();
+
+        for (LightObject lightObject : castLights)
+            lightObject.update();
 
         globalHandler.setCombinedMatrix(MateCanvas.sceneCamera);
         globalHandler.updateAndRender();
@@ -110,7 +116,7 @@ public class Scene {
 
         castLights = new Array<>();
         staticLights = new Array<>();
-
+        timeTick = true;
         createScene();
     }
 
@@ -244,8 +250,6 @@ public class Scene {
                 double x = cx - centerX;
                 double y = cy + centerY;
 
-                System.out.println(y);
-
                 attributeMap.put("x", String.valueOf(x));
                 attributeMap.put("y", String.valueOf(y));
             }
@@ -260,8 +264,11 @@ public class Scene {
             sceneObject.initObject(attributeMap, propertyMap);
             sceneObject.getSprite().setFlip(flags[0] != 0, flags[1] != 0);
 
-            if (propertyMap.containsKey("animation"))
+            if (propertyMap.containsKey("animation")) {
                 sceneObject.initAnimation(propertyMap.get("animation"), propertyMap.get("animationfirststate"));
+                sceneObject.getSpineObject().setFlip(flags[0] != 0, flags[1] != 0);
+            }
+
             sceneLayer.addActor(sceneObject);
         }
     }
@@ -282,8 +289,7 @@ public class Scene {
 
     public void dispose() {
         for (Actor actor : sceneStage.getActors())
-            if (actor instanceof SceneLayer) {
-                SceneLayer sceneLayer = (SceneLayer) actor;
+            if (actor instanceof SceneLayer sceneLayer) {
                 sceneLayer.dispose();
             }
 
@@ -318,6 +324,10 @@ public class Scene {
         return sceneHeight;
     }
 
+    public DayCycleLight getDayCycleLight() {
+        return dayCycleLight;
+    }
+
     public Array<LightObject> getCastLights() {
         return castLights;
     }
@@ -350,4 +360,7 @@ public class Scene {
         return mateSceneLoader;
     }
 
+    public void setTimeTick(boolean timeTick) {
+        this.timeTick = timeTick;
+    }
 }
