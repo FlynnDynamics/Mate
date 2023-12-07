@@ -14,6 +14,8 @@ public class SpineObject {
     private TextureAtlas spineAtlas;
     private Skeleton skeleton;
 
+    private float resWidth, resHeight, resX, resY;
+
     public SpineObject(String path, String firstState, SceneObject sceneObject) {
         this.sceneObject = sceneObject;
         initSpine(path, firstState);
@@ -24,9 +26,15 @@ public class SpineObject {
         SkeletonJson json = new SkeletonJson(spineAtlas);
         skeleton = new Skeleton(json.readSkeletonData(Gdx.files.internal("Skeletons/" + path + "/skeleton.json")));
 
+        resWidth = skeleton.getData().getWidth();
+        resHeight = skeleton.getData().getHeight();
+        resX = skeleton.getData().getX();
+        resY = skeleton.getData().getY();
+
         skeleton.setScale(sceneObject.getResScale().x, sceneObject.getResScale().y);
         AnimationStateData stateData = new AnimationStateData(skeleton.getData());
         setPosition(sceneObject.getX(), sceneObject.getY());
+
         animationState = new AnimationState(stateData);
         animationState.setAnimation(0, firstState, true);
     }
@@ -48,24 +56,33 @@ public class SpineObject {
         skeleton.updateWorldTransform();
     }
 
-    public boolean isFlipedX() {
-        if (skeleton.getScaleX() < 0)
+    public boolean isFlipX() {
+        if (skeleton.getScaleX() < 0) {
             return true;
+        }
         return false;
     }
 
-    public boolean isFlipedY() {
+    public boolean isFlipY() {
         if (skeleton.getScaleY() < 0)
             return true;
         return false;
     }
 
+    private boolean flipCenter;
+
     public void setFlip(boolean x, boolean y) {
         if (x)
             skeleton.setScaleX(skeleton.getScaleX() * -1);
-        if (y) {
+        if (y)
             skeleton.setScaleY(skeleton.getScaleY() * -1);
-        }
+
+        if (isFlipX() && !flipCenter)
+            skeleton.getData().setX(-(resX + resWidth));
+        else
+            skeleton.getData().setX(resX);
+
+        setPosition(sceneObject.getX(), sceneObject.getY());
     }
 
     public void dispose() {

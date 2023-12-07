@@ -1,0 +1,32 @@
+{
+    "activeFile": "map.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "C:/work home/Mate/assets/TileSets"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/work home/Mate/assets/TileSets/Grass.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/work home/Mate/assets/TileSets/Hextiles.tsx": {
+            "scaleInDock": 1
+        },
+        "map.tmx": {
+            "scale": 0.1959375,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2562.0414673046253,
+                "y": 1281.0207336523129
+            }
+        }
+    },
+    "openFiles": [
+        "map.tmx"
+    ],
+    "project": "mate.tiled-project",
+    "recentFiles": [
+        "map.tmx"
+    ]
+}

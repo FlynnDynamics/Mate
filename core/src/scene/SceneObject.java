@@ -57,6 +57,12 @@ public class SceneObject extends Actor {
         }
     }
 
+    private SpineObject spineObject;
+
+    public void initAnimation(String path, String firstState) {
+        spineObject = new SpineObject(path, firstState, this);
+    }
+
     public void drawShadow(Batch batch, float parentAlpha) {
         if (spriteShadow) {
             Vector2 tmp = new Vector2(this.getX(), this.getY());
@@ -75,12 +81,6 @@ public class SceneObject extends Actor {
     @Override
     public void act(float delta) {
 
-    }
-
-    private SpineObject spineObject;
-
-    public void initAnimation(String path, String firstState) {
-        spineObject = new SpineObject(path, firstState, this);
     }
 
     @Override
@@ -103,10 +103,11 @@ public class SceneObject extends Actor {
             spineObject.setPosition(x, y);
     }
 
-    public void flipX() {
-        sprite.flip(true, false);
+
+    public void setFlip(boolean flipX, boolean flipY) {
+        sprite.flip(flipX, flipY);
         if (spineObject != null)
-            spineObject.setFlip(true, false);
+            spineObject.setFlip(flipX, flipY);
     }
 
     public Vector2 getCenterPosition() {

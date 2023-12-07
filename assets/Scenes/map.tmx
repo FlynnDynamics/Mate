@@ -29,7 +29,7 @@
     <property name="offsety" type="float" value="60"/>
     <property name="originoffsetx" type="float" value="60"/>
     <property name="originoffsety" type="float" value="-550"/>
-    <property name="spriteshadow" type="bool" value="true"/>
+    <property name="spriteshadow" type="bool" value="false"/>
    </properties>
   </object>
   <object id="67" gid="71" x="2421" y="1397" width="894" height="1190">

@@ -66,7 +66,7 @@ public class ShadowObject {
 
         float offsetY = this.offsetY * sceneObject.getResScale().y;
         //-----------------
-        if (sceneObject.getSprite().isFlipX() && sceneObject.getSpineObject() == null)
+        if (sceneObject.getSprite().isFlipX() || sceneObject.getSpineObject() != null && sceneObject.getSpineObject().isFlipX())
             originOffsetX *= -1;
         //-----------------
         originOffsetX *= 1 / (MateCanvas.sceneCamera.viewportWidth / Gdx.graphics.getWidth());
@@ -114,7 +114,7 @@ public class ShadowObject {
         //-----------------
         Vector2 screenOrigin = MateCanvas.getScreenOrigin();
         if (flip)
-            sceneObject.flipX();
+            sceneObject.setFlip(true, false);
         sceneObject.setPosition(screenOrigin.x, screenOrigin.y);
         //-----------------
         vfxFrameBuffer.begin();
@@ -138,7 +138,7 @@ public class ShadowObject {
         //-----------------
         sceneObject.setPosition(position.x, position.y);
         if (flip)
-            sceneObject.flipX();
+            sceneObject.setFlip(true, false);
         //-----------------
         batch.begin();
         //-----------------
