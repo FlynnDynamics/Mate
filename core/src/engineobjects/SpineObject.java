@@ -69,7 +69,7 @@ public class SpineObject {
         return false;
     }
 
-    private boolean flipCenter;
+    private boolean flipCenter = true;
 
     public void setFlip(boolean x, boolean y) {
         if (x)

@@ -1,4 +1,8 @@
 {
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
     "activeFile": "map.tmx",
     "expandedProjectPaths": [
         ".",
@@ -6,27 +10,62 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "C:/work home/Mate/assets/TileSets/Demoset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "C:/work home/Mate/assets/TileSets/Grass.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "C:/work home/Mate/assets/TileSets/Hextiles.tsx": {
-            "scaleInDock": 1
+            "dynamicWrapping": true,
+            "scaleInDock": 0.0625,
+            "scaleInEditor": 0.12
         },
-        "map.tmx": {
-            "scale": 0.1959375,
+        "house.tmx": {
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2562.0414673046253,
-                "y": 1281.0207336523129
+                "x": 264,
+                "y": -169
+            }
+        },
+        "map.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1548,
+                "y": 1536
             }
         }
     },
+    "last.worldFilePath": "C:/work home/Mate/assets/Scenes",
+    "loadedWorlds": [
+        "C:/work home/Mate/assets/Scenes/test.world"
+    ],
+    "map.fixedSize": true,
+    "map.height": 1,
+    "map.lastUsedFormat": "tmx",
+    "map.orientation": null,
+    "map.renderOrder": null,
+    "map.tileHeight": 512,
+    "map.tileWidth": 512,
+    "map.width": 1,
     "openFiles": [
-        "map.tmx"
+        "map.tmx",
+        "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
+        "house.tmx"
     ],
     "project": "mate.tiled-project",
+    "property.type": "object",
     "recentFiles": [
-        "map.tmx"
+        "house.tmx",
+        "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
+        "map.tmx",
+        "C:/work home/Mate/assets/TileSets/Demoset.tsx"
     ]
 }

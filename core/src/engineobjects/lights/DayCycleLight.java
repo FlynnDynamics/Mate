@@ -18,8 +18,8 @@ public class DayCycleLight extends LightObject {
     }
 
     public void calculateCyclePosition(float currentTick) {
-        float angle = (float) (2 * Math.PI - (2 * Math.PI * currentTick / totalTicks));
-
+        float adjustedTick = currentTick - (totalTicks / 24) * 6;
+        float angle = (float) (2 * Math.PI - (2 * Math.PI * adjustedTick / totalTicks));
         float x = center.x + (distance / 2) * (float) Math.cos(angle);
         float y = center.y + (distance / 2) * (float) Math.sin(angle);
         setPosition(new Vector2(x, y));
@@ -41,16 +41,16 @@ public class DayCycleLight extends LightObject {
         Color daylightColor = new Color(cycleColors[2]);
         Color eveningColor = new Color(cycleColors[3]);
 
-        if (hour < 6) {
+        if (hour < 4) {
             currentColor.set(moonlightColor);
-        } else if (hour < 8) {
-            currentColor.set(moonlightColor.lerp(morningColor, (hour - 6) / 2));
-        } else if (hour < 16) {
-            currentColor.set(morningColor.lerp(daylightColor, (hour - 8) / 8));
-        } else if (hour < 22) {
-            currentColor.set(daylightColor.lerp(eveningColor, (hour - 16) / 6));
+        } else if (hour < 6) {
+            currentColor.set(moonlightColor.lerp(morningColor, (hour - 4) / 2));
+        } else if (hour < 14) {
+            currentColor.set(morningColor.lerp(daylightColor, (hour - 6) / 8));
+        } else if (hour < 20) {
+            currentColor.set(daylightColor.lerp(eveningColor, (hour - 14) / 6));
         } else {
-            currentColor.set(eveningColor.lerp(moonlightColor, (hour - 22) / 2));
+            currentColor.set(eveningColor.lerp(moonlightColor, (hour - 20) / 4));
         }
 
         return currentColor;

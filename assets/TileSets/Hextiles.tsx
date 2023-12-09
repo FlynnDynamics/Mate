@@ -39,9 +39,11 @@
  </tile>
  <tile id="46">
   <properties>
+   <property name="animation" value="Tree01"/>
+   <property name="animationfirststate" value="animation"/>
    <property name="masky" type="float" value="70"/>
-   <property name="offsety" type="float" value="70"/>
-   <property name="originoffsetx" type="float" value="50"/>
+   <property name="offsety" type="float" value="60"/>
+   <property name="originoffsetx" type="float" value="60"/>
    <property name="originoffsety" type="float" value="-550"/>
    <property name="spriteshadow" type="bool" value="true"/>
   </properties>

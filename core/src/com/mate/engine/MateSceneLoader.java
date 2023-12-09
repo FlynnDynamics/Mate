@@ -169,7 +169,7 @@ public class MateSceneLoader {
     public Document readXmlDocument(String path) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        InputSource inputSource = new InputSource(new StringReader(Gdx.files.internal("assets/" + path).readString()));
+        InputSource inputSource = new InputSource(new StringReader(Gdx.files.internal("assets/" + path).readString())); // remove "assets/" on export.
         Document document = builder.parse(inputSource);
         return document;
     }

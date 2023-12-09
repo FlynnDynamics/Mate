@@ -48,7 +48,7 @@ public class ShadowObject {
             return;
         //-----------------
         Texture texture;
-        if (degree < 270 && degree > -90)
+        if (degree > 90)
             texture = getTexture(position, batch, true);
         else
             texture = getTexture(position, batch, false);
@@ -59,15 +59,9 @@ public class ShadowObject {
         float centerX = sceneObject.getWidth() / (2 * MateCanvas.sceneCamera.viewportWidth / Gdx.graphics.getWidth());
         float centerY = sceneObject.getHeight() / (2 * MateCanvas.sceneCamera.viewportHeight / Gdx.graphics.getHeight());
         //-----------------
-
         float originOffsetX = this.originOffsetX * sceneObject.getResScale().x;
         float originOffsetY = this.originOffsetY * sceneObject.getResScale().y;
-
-
         float offsetY = this.offsetY * sceneObject.getResScale().y;
-        //-----------------
-        if (sceneObject.getSprite().isFlipX() || sceneObject.getSpineObject() != null && sceneObject.getSpineObject().isFlipX())
-            originOffsetX *= -1;
         //-----------------
         originOffsetX *= 1 / (MateCanvas.sceneCamera.viewportWidth / Gdx.graphics.getWidth());
         originOffsetY *= 1 / (MateCanvas.sceneCamera.viewportHeight / Gdx.graphics.getHeight());

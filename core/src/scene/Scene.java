@@ -15,6 +15,7 @@ import com.mate.engine.MateSceneLoader;
 import engineobjects.lights.DayCycleLight;
 import engineobjects.lights.LightObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -192,6 +193,9 @@ public class Scene {
             }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void createObjectGroup(Node node, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
         for (int i = 0; i < node.getChildNodes().getLength(); i++) {
 
@@ -200,27 +204,25 @@ public class Scene {
             if (node.getChildNodes().item(i).getNodeName().equals("properties"))
                 continue;
 
-            Map<String, String> attributeMap = new HashMap<>();
-            for (int a = 0; a < node.getChildNodes().item(i).getAttributes().getLength(); a++)
-                attributeMap.put(node.getChildNodes().item(i).getAttributes().item(a).getNodeName(), node.getChildNodes().item(i).getAttributes().item(a).getNodeValue());
+            Map<String, String> attributeMap = extractAttributes(node, i);
+            Map<String, String> propertyMap = extractProperties(node, i);
 
-            Map<String, String> propertyMap = new HashMap<>();
-            if (node.getChildNodes().item(i).getChildNodes() != null && node.getChildNodes().item(i).getChildNodes().getLength() != 0)
-                for (int a = 0; a < node.getChildNodes().item(i).getChildNodes().item(1).getChildNodes().getLength(); a++)
-                    if (node.getChildNodes().item(i).getChildNodes().item(1).getChildNodes().item(a).getNodeName().equals("property"))
-                        propertyMap.put(node.getChildNodes().item(i).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("name").getNodeValue(), node.getChildNodes().item(i).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("value").getNodeValue());
-
-            if (attributeMap.containsKey("type"))
-                if (attributeMap.get("type").equals("poly")) {
-                    sceneLayer.addScenePoly(attributeMap, propertyMap, node.getChildNodes().item(i).getChildNodes().item(3).getAttributes().getNamedItem("points").getNodeValue());
-                    continue;
-                } else if (attributeMap.get("type").equals("pointlight")) {
-                    sceneLayer.addPointLight(attributeMap, propertyMap);
-                    continue;
-                } else if (attributeMap.get("type").equals("particle")) {
-                    sceneLayer.addParticle(attributeMap, propertyMap);
-                    continue;
+            if (attributeMap.containsKey("type")) {
+                String type = attributeMap.get("type");
+                switch (type) {
+                    case "poly":
+                        sceneLayer.addScenePoly(attributeMap, propertyMap, node.getChildNodes().item(i).getChildNodes().item(3).getAttributes().getNamedItem("points").getNodeValue());
+                        break;
+                    case "pointlight":
+                        sceneLayer.addPointLight(attributeMap, propertyMap);
+                        break;
+                    case "particle":
+                        sceneLayer.addParticle(attributeMap, propertyMap);
+                        break;
+                    default:
+                        break;
                 }
+            }
 
             long gIdRaw = Long.parseLong((attributeMap.get("gid")));
             int[] flags = mateSceneLoader.extractBits(gIdRaw);
@@ -232,27 +234,12 @@ public class Scene {
 
             Map<String, Map<String, String>> tilesetDataMap = mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get(gId - Integer.parseInt(tilesetInfo[0]));
             String[] textureKey = Gdx.files.internal(tilesetDataMap.get("image").get("source")).name().split("\\.");
+            System.out.println(textureKey[1]);
             Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
             SceneObject sceneObject = new SceneObject(sprite, true, sceneLayer);
 
-            if (attributeMap.containsKey("rotation")) {
-                double centerX = Double.parseDouble(attributeMap.get("width")) / 2;
-                double centerY = Double.parseDouble(attributeMap.get("height")) / 2;
-                double cosRotation = Math.cos(Math.toRadians(-Double.parseDouble(attributeMap.get("rotation"))));
-                double sinRotation = Math.sin(Math.toRadians(-Double.parseDouble(attributeMap.get("rotation"))));
-
-                double rotatedCenterX = centerX * cosRotation - centerY * sinRotation;
-                double rotatedCenterY = centerX * sinRotation + centerY * cosRotation;
-
-                double cx = Double.parseDouble(attributeMap.get("x")) + rotatedCenterX;
-                double cy = Double.parseDouble(attributeMap.get("y")) - rotatedCenterY;
-
-                double x = cx - centerX;
-                double y = cy + centerY;
-
-                attributeMap.put("x", String.valueOf(x));
-                attributeMap.put("y", String.valueOf(y));
-            }
+            if (attributeMap.containsKey("rotation"))
+                applyRotation(attributeMap);
 
             if (tilesetDataMap.containsKey("properties"))
                 tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
@@ -273,6 +260,60 @@ public class Scene {
         }
     }
 
+    private void createDefaultEntity() {
+
+    }
+
+    private void createComplexEntity() {
+
+    }
+
+    private Map<String, String> extractAttributes(Node node, int index) {
+        Map<String, String> attributeMap = new HashMap<>();
+        NamedNodeMap attributes = node.getChildNodes().item(index).getAttributes();
+        for (int a = 0; a < attributes.getLength(); a++) {
+            Node attribute = attributes.item(a);
+            attributeMap.put(attribute.getNodeName(), attribute.getNodeValue());
+        }
+        return attributeMap;
+    }
+
+    private Map<String, String> extractProperties(Node node, int index) {
+        Map<String, String> propertyMap = new HashMap<>();
+        Node childNode = node.getChildNodes().item(index);
+        if (childNode.getChildNodes() != null && childNode.getChildNodes().getLength() != 0) {
+            NodeList properties = childNode.getChildNodes().item(1).getChildNodes();
+            for (int a = 0; a < properties.getLength(); a++) {
+                Node propertyNode = properties.item(a);
+                if (propertyNode.getNodeName().equals("property")) {
+                    NamedNodeMap propertyAttributes = propertyNode.getAttributes();
+                    propertyMap.put(propertyAttributes.getNamedItem("name").getNodeValue(), propertyAttributes.getNamedItem("value").getNodeValue());
+                }
+            }
+        }
+        return propertyMap;
+    }
+
+    private void applyRotation(Map<String, String> attributeMap) {
+        double centerX = Double.parseDouble(attributeMap.get("width")) / 2;
+        double centerY = Double.parseDouble(attributeMap.get("height")) / 2;
+        double rotation = -Double.parseDouble(attributeMap.get("rotation"));
+        double cosRotation = Math.cos(Math.toRadians(rotation));
+        double sinRotation = Math.sin(Math.toRadians(rotation));
+
+        double rotatedCenterX = centerX * cosRotation - centerY * sinRotation;
+        double rotatedCenterY = centerX * sinRotation + centerY * cosRotation;
+
+        double cx = Double.parseDouble(attributeMap.get("x")) + rotatedCenterX;
+        double cy = Double.parseDouble(attributeMap.get("y")) - rotatedCenterY;
+
+        double x = cx - centerX;
+        double y = cy + centerY;
+
+        attributeMap.put("x", String.valueOf(x));
+        attributeMap.put("y", String.valueOf(y));
+    }
+
     private void initTextureAtlas(String path) {
         if (atlasMap.containsKey(path))
             return;
@@ -286,6 +327,8 @@ public class Scene {
         mateSceneLoader.loadTileSetData(path);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void dispose() {
         for (Actor actor : sceneStage.getActors())

@@ -103,11 +103,10 @@ public class SceneObject extends Actor {
             spineObject.setPosition(x, y);
     }
 
-
     public void setFlip(boolean flipX, boolean flipY) {
         sprite.flip(flipX, flipY);
-        if (spineObject != null)
-            spineObject.setFlip(flipX, flipY);
+            if (spineObject != null)
+                spineObject.setFlip(flipX, flipY);
     }
 
     public Vector2 getCenterPosition() {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="4">
+ <tileset firstgid="1" source="../TileSets/Hextiles.tsx"/>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" gid="34" x="0" y="0" width="640" height="512"/>
+ </objectgroup>
+ <objectgroup id="3" name="Object Layer 2">
+  <object id="3" gid="36" x="335.167" y="-41.1667" width="141.5" height="141.5"/>
+ </objectgroup>
+</map>
