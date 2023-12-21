@@ -286,7 +286,8 @@ public class Scene {
     }
 
     private void createComplexEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) {
-
+        //Complex Entitys sind einfach nur scene objects, welche eine GruppenID bekommen.
+        //Sie werden aus seperaten Tiled maps geladen.
     }
 
     private Map<String, String> extractAttributes(Node node, int index) {
