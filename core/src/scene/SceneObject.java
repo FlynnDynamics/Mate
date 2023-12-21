@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
+import engineobjects.ParticleObject;
 import engineobjects.ShadowObject;
 import engineobjects.SpineObject;
 import enums.ShadowType;
@@ -63,6 +65,8 @@ public class SceneObject extends Actor {
         spineObject = new SpineObject(path, firstState, this);
     }
 
+    private Array<ParticleObject> particleObjects;
+
     public void drawShadow(Batch batch, float parentAlpha) {
         if (spriteShadow) {
             Vector2 tmp = new Vector2(this.getX(), this.getY());
@@ -105,8 +109,8 @@ public class SceneObject extends Actor {
 
     public void setFlip(boolean flipX, boolean flipY) {
         sprite.flip(flipX, flipY);
-            if (spineObject != null)
-                spineObject.setFlip(flipX, flipY);
+        if (spineObject != null)
+            spineObject.setFlip(flipX, flipY);
     }
 
     public Vector2 getCenterPosition() {

@@ -81,16 +81,41 @@ public class Scene {
 
     }
 
-    private void configureScene(NodeList nodeList) {
+    private Map<String, String> readSceneAttributes(NodeList nodeList) {
         Map<String, String> attributeMap = new HashMap<>();
-        Map<String, String> propertyMap = new HashMap<>();
-
         for (int a = 0; a < nodeList.item(0).getAttributes().getLength(); a++)
             attributeMap.put(nodeList.item(0).getAttributes().item(a).getNodeName(), nodeList.item(0).getAttributes().item(a).getNodeValue());
+        return attributeMap;
+    }
 
+    private Map<String, String> readSceneProperties(NodeList nodeList) {
+        Map<String, String> propertyMap = new HashMap<>();
         for (int a = 0; a < nodeList.item(0).getChildNodes().item(1).getChildNodes().getLength(); a++)
             if (nodeList.item(0).getChildNodes().item(1).getChildNodes().item(a).getNodeName().equals("property"))
                 propertyMap.put(nodeList.item(0).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("name").getNodeValue(), nodeList.item(0).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("value").getNodeValue());
+        return propertyMap;
+    }
+
+    private Map<String, String> readLayerAttributes(NodeList nodeList, int index) {
+        Map<String, String> attributeMap = new HashMap<>();
+        for (int a = 0; a < nodeList.item(0).getChildNodes().item(index).getAttributes().getLength(); a++)
+            attributeMap.put(nodeList.item(0).getChildNodes().item(index).getAttributes().item(a).getNodeName(), nodeList.item(0).getChildNodes().item(index).getAttributes().item(a).getNodeValue());
+        return attributeMap;
+    }
+
+    private Map<String, String> readLayerProperties(NodeList nodeList, int index) {
+        Map<String, String> propertyMap = new HashMap<>();
+        if (nodeList.item(0).getChildNodes().item(index).getChildNodes().getLength() != 0)
+            for (int a = 0; a < nodeList.item(0).getChildNodes().item(index).getChildNodes().item(1).getChildNodes().getLength(); a++)
+                if (nodeList.item(0).getChildNodes().item(index).getChildNodes().item(1).getChildNodes().item(a).getNodeName().equals("property"))
+                    propertyMap.put(nodeList.item(0).getChildNodes().item(index).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("name").getNodeValue(), nodeList.item(0).getChildNodes().item(index).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("value").getNodeValue());
+        return propertyMap;
+    }
+
+
+    private void configureScene(NodeList nodeList) {
+        Map<String, String> attributeMap = readSceneAttributes(nodeList);
+        Map<String, String> propertyMap = readSceneProperties(nodeList);
 
         widthTileCount = Integer.parseInt(attributeMap.get("width"));
         heightTileCount = Integer.parseInt(attributeMap.get("height"));
@@ -129,21 +154,13 @@ public class Scene {
         for (int i = 0; i < nodeList.item(0).getChildNodes().getLength(); i++) {
             String nodeName = nodeList.item(0).getChildNodes().item(i).getNodeName();
 
-            Map<String, String> attributeMap = new HashMap<>();
-            Map<String, String> propertyMap = new HashMap<>();
+            Map<String, String> attributeMap, propertyMap;
 
             if (nodeName.equals("layer") || nodeName.equals("objectgroup")) {
-                for (int a = 0; a < nodeList.item(0).getChildNodes().item(i).getAttributes().getLength(); a++)
-                    attributeMap.put(nodeList.item(0).getChildNodes().item(i).getAttributes().item(a).getNodeName(), nodeList.item(0).getChildNodes().item(i).getAttributes().item(a).getNodeValue());
-
-                nodeList.item(0).getChildNodes().item(i);
-                if (nodeList.item(0).getChildNodes().item(i).getChildNodes().getLength() != 0)
-                    for (int a = 0; a < nodeList.item(0).getChildNodes().item(i).getChildNodes().item(1).getChildNodes().getLength(); a++)
-                        if (nodeList.item(0).getChildNodes().item(i).getChildNodes().item(1).getChildNodes().item(a).getNodeName().equals("property"))
-                            propertyMap.put(nodeList.item(0).getChildNodes().item(i).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("name").getNodeValue(), nodeList.item(0).getChildNodes().item(i).getChildNodes().item(1).getChildNodes().item(a).getAttributes().getNamedItem("value").getNodeValue());
-
-            }
-
+                attributeMap = readLayerAttributes(nodeList, i);
+                propertyMap = readLayerProperties(nodeList, i);
+            } else
+                continue;
 
             if (nodeName.equals("layer")) {
                 SceneLayer sceneLayer = new SceneLayer(this, attributeMap, propertyMap, false);
@@ -207,64 +224,68 @@ public class Scene {
             Map<String, String> attributeMap = extractAttributes(node, i);
             Map<String, String> propertyMap = extractProperties(node, i);
 
-            if (attributeMap.containsKey("type")) {
-                String type = attributeMap.get("type");
-                switch (type) {
-                    case "poly":
-                        sceneLayer.addScenePoly(attributeMap, propertyMap, node.getChildNodes().item(i).getChildNodes().item(3).getAttributes().getNamedItem("points").getNodeValue());
-                        break;
-                    case "pointlight":
-                        sceneLayer.addPointLight(attributeMap, propertyMap);
-                        break;
-                    case "particle":
-                        sceneLayer.addParticle(attributeMap, propertyMap);
-                        break;
-                    default:
-                        break;
-                }
+            if (!attributeMap.containsKey("type"))
+                attributeMap.put("type", "");
+
+            String type = attributeMap.get("type");
+            switch (type) {
+                case "poly":
+                    sceneLayer.addScenePoly(attributeMap, propertyMap, node.getChildNodes().item(i).getChildNodes().item(3).getAttributes().getNamedItem("points").getNodeValue());
+                    continue;
+                case "pointlight":
+                    sceneLayer.addPointLight(attributeMap, propertyMap);
+                    continue;
+                case "particle":
+                    sceneLayer.addParticle(attributeMap, propertyMap);
+                    continue;
+                case "complex":
+                    createComplexEntity(attributeMap, propertyMap, sceneLayer);
+                    continue;
+                default:
+                    createDefaultEntity(attributeMap, propertyMap, sceneLayer);
+
             }
-
-            long gIdRaw = Long.parseLong((attributeMap.get("gid")));
-            int[] flags = mateSceneLoader.extractBits(gIdRaw);
-            int gId = flags[3];
-
-            String[] tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/" + sceneName);
-            initTileSet(tilesetInfo[1]);
-            initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
-
-            Map<String, Map<String, String>> tilesetDataMap = mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get(gId - Integer.parseInt(tilesetInfo[0]));
-            String[] textureKey = Gdx.files.internal(tilesetDataMap.get("image").get("source")).name().split("\\.");
-            System.out.println(textureKey[1]);
-            Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
-            SceneObject sceneObject = new SceneObject(sprite, true, sceneLayer);
-
-            if (attributeMap.containsKey("rotation"))
-                applyRotation(attributeMap);
-
-            if (tilesetDataMap.containsKey("properties"))
-                tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
-
-            propertyMap.put("reswidth", tilesetDataMap.get("image").get("width"));
-            propertyMap.put("resheight", tilesetDataMap.get("image").get("height"));
-
-
-            sceneObject.initObject(attributeMap, propertyMap);
-            sceneObject.getSprite().setFlip(flags[0] != 0, flags[1] != 0);
-
-            if (propertyMap.containsKey("animation")) {
-                sceneObject.initAnimation(propertyMap.get("animation"), propertyMap.get("animationfirststate"));
-                sceneObject.getSpineObject().setFlip(flags[0] != 0, flags[1] != 0);
-            }
-
-            sceneLayer.addActor(sceneObject);
         }
     }
 
-    private void createDefaultEntity() {
+    private void createDefaultEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
+
+        long gIdRaw = Long.parseLong((attributeMap.get("gid")));
+        int[] flags = mateSceneLoader.extractBits(gIdRaw);
+        int gId = flags[3];
+
+        String[] tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/" + sceneName);
+        initTileSet(tilesetInfo[1]);
+        initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
+
+        Map<String, Map<String, String>> tilesetDataMap = mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get(gId - Integer.parseInt(tilesetInfo[0]));
+        String[] textureKey = Gdx.files.internal(tilesetDataMap.get("image").get("source")).name().split("\\.");
+
+        Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
+        SceneObject sceneObject = new SceneObject(sprite, true, sceneLayer);
+
+        if (attributeMap.containsKey("rotation"))
+            applyRotation(attributeMap);
+
+        if (tilesetDataMap.containsKey("properties"))
+            tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
+
+        propertyMap.put("reswidth", tilesetDataMap.get("image").get("width"));
+        propertyMap.put("resheight", tilesetDataMap.get("image").get("height"));
+
+        sceneObject.initObject(attributeMap, propertyMap);
+        sceneObject.getSprite().setFlip(flags[0] != 0, flags[1] != 0);
+
+        if (propertyMap.containsKey("animation")) {
+            sceneObject.initAnimation(propertyMap.get("animation"), propertyMap.get("animationfirststate"));
+            sceneObject.getSpineObject().setFlip(flags[0] != 0, flags[1] != 0);
+        }
+
+        sceneLayer.addActor(sceneObject);
 
     }
 
-    private void createComplexEntity() {
+    private void createComplexEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) {
 
     }
 
