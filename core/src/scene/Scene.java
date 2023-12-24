@@ -242,24 +242,31 @@ public class Scene {
                     createComplexEntity(attributeMap, propertyMap, sceneLayer);
                     continue;
                 default:
-                    createDefaultEntity(attributeMap, propertyMap, sceneLayer);
+                    createDefaultEntity(attributeMap, propertyMap, sceneLayer, null);
 
             }
         }
     }
 
-    private void createDefaultEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
+    private void createDefaultEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer, SceneCplx sceneCplx) throws ParserConfigurationException, IOException, SAXException {
 
         long gIdRaw = Long.parseLong((attributeMap.get("gid")));
         int[] flags = mateSceneLoader.extractBits(gIdRaw);
         int gId = flags[3];
 
-        String[] tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/" + sceneName);
+        String[] tilesetInfo;
+        if (sceneCplx != null)
+            tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/Complex/" + sceneCplx.getCplxFileName());
+        else
+            tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/" + sceneName);
+
         initTileSet(tilesetInfo[1]);
         initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
 
         Map<String, Map<String, String>> tilesetDataMap = mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get(gId - Integer.parseInt(tilesetInfo[0]));
         String[] textureKey = Gdx.files.internal(tilesetDataMap.get("image").get("source")).name().split("\\.");
+
+        System.out.println(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
 
         Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
         SceneObject sceneObject = new SceneObject(sprite, true, sceneLayer);
@@ -273,7 +280,7 @@ public class Scene {
         propertyMap.put("reswidth", tilesetDataMap.get("image").get("width"));
         propertyMap.put("resheight", tilesetDataMap.get("image").get("height"));
 
-        sceneObject.initObject(attributeMap, propertyMap);
+        sceneObject.initObject(attributeMap, propertyMap, sceneCplx);
         sceneObject.getSprite().setFlip(flags[0] != 0, flags[1] != 0);
 
         if (propertyMap.containsKey("animation")) {
@@ -285,9 +292,45 @@ public class Scene {
 
     }
 
-    private void createComplexEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) {
-        //Complex Entitys sind einfach nur scene objects, welche eine GruppenID bekommen.
-        //Sie werden aus seperaten Tiled maps geladen.
+    private void createComplexEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
+        // Complex entities are simply scene objects that get a group ID. They are loaded from separate tiled maps.
+        String cplxName = propertyMap.get("cplx");
+        SceneCplx sceneCplx = new SceneCplx(this, Integer.parseInt(attributeMap.get("id")), cplxName);
+
+        Document document = mateSceneLoader.readXmlDocument("Scenes/Complex/" + cplxName);
+        NodeList nodeList = document.getChildNodes();
+
+        Map<String, String> sceneAttributes = readSceneAttributes(nodeList);
+        Map<String, String> sceneProperties = readSceneProperties(nodeList);
+
+        for (int i = 0; i < nodeList.item(0).getChildNodes().getLength(); i++) {
+            String nodeName = nodeList.item(0).getChildNodes().item(i).getNodeName();
+
+            if (!nodeName.equals("objectgroup"))
+                continue;
+
+            Map<String, String> layerAttributes = readLayerAttributes(nodeList, i);
+            Map<String, String> layerProperties = readLayerProperties(nodeList, i);
+
+            Node node = nodeList.item(0).getChildNodes().item(i);
+
+            for (int j = 0; j < node.getChildNodes().getLength(); j++) {
+
+                if (node.getChildNodes().item(j).getNodeName().equals("#text"))
+                    continue;
+                if (node.getChildNodes().item(j).getNodeName().equals("properties"))
+                    continue;
+
+                Map<String, String> objectAttributes = extractAttributes(node, j);
+                Map<String, String> objectProperties = extractProperties(node, j);
+
+               // System.out.println(objectAttributes.get("id"));
+                createDefaultEntity(objectAttributes, objectProperties, sceneLayer, sceneCplx);
+
+            }
+
+        }
+
     }
 
     private Map<String, String> extractAttributes(Node node, int index) {

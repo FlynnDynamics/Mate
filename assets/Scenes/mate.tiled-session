@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map.tmx",
+    "activeFile": "Complex/house.tmx",
     "expandedProjectPaths": [
+        "Complex",
         ".",
         "C:/work home/Mate/assets/TileSets"
     ],
@@ -16,7 +17,7 @@
         },
         "C:/work home/Mate/assets/TileSets/Grass.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1
+            "scaleInDock": 0.125
         },
         "C:/work home/Mate/assets/TileSets/Hextiles.tsx": {
             "dynamicWrapping": true,
@@ -24,11 +25,15 @@
             "scaleInEditor": 0.12
         },
         "Complex/house.tmx": {
-            "scale": 1.128125,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3,
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 325.31855955678674,
-                "y": 274.792243767313
+                "x": 544,
+                "y": 306
             }
         },
         "TileSets/Hextiles.tsx": {
@@ -53,8 +58,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 3444,
-                "y": 1148
+                "x": 3304,
+                "y": 944
             }
         }
     },
@@ -74,14 +79,15 @@
     "openFiles": [
         "map.tmx",
         "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
-        "house.tmx"
+        "Complex/house.tmx"
     ],
     "project": "mate.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "house.tmx",
-        "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
         "map.tmx",
+        "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
+        "Complex/house.tmx",
+        "house.tmx",
         "C:/work home/Mate/assets/TileSets/Demoset.tsx"
     ]
 }

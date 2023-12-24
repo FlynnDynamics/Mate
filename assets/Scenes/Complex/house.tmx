@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="5">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="7">
  <tileset firstgid="1" source="../../TileSets/Hextiles.tsx"/>
  <objectgroup id="2" name="Object Layer 1">
   <object id="1" gid="34" x="0" y="512" width="640" height="512"/>
  </objectgroup>
  <objectgroup id="3" name="Object Layer 2">
-  <object id="3" gid="36" x="336" y="485" width="141.5" height="141.5"/>
-  <object id="4" gid="39" x="155" y="475" width="128" height="128"/>
+  <object id="5" gid="35" x="276.5" y="493.5" width="199" height="124.707">
+   <properties>
+    <property name="animation" value="FrogDemo"/>
+    <property name="animationfirststate" value="animation2"/>
+    <property name="masky" type="float" value="0"/>
+    <property name="offsety" type="float" value="20"/>
+    <property name="originoffsetx" type="float" value="0"/>
+    <property name="originoffsety" type="float" value="-150"/>
+    <property name="spriteshadow" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -17,7 +17,9 @@ public class SceneObject extends Actor {
     private final Sprite sprite;
 
     private final boolean object;
-    private int id;
+    private int objectID;
+
+    private SceneCplx sceneCplx;
 
     private boolean spriteShadow;
     private ShadowObject shadowObject;
@@ -30,9 +32,12 @@ public class SceneObject extends Actor {
         this.sceneLayer = sceneLayer;
     }
 
-    public void initObject(Map<String, String> attributeMap, Map<String, String> propertyMap) {
+    public void initObject(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneCplx sceneCplx) {
         if (!object)
             return;
+
+        if (sceneCplx != null)
+            this.sceneCplx = sceneCplx;
 
         setSize(Float.parseFloat(attributeMap.get("width")), Float.parseFloat(attributeMap.get("height")));
         setPosition(Float.parseFloat(attributeMap.get("x")), sceneLayer.getScene().getSceneHeight() - Float.parseFloat(attributeMap.get("y")));
@@ -44,7 +49,7 @@ public class SceneObject extends Actor {
 
         this.setOrigin(sprite.getOriginX(), sprite.getOriginY());
 
-        id = Integer.parseInt(attributeMap.get("id"));
+        objectID = Integer.parseInt(attributeMap.get("id"));
 
         if (attributeMap.containsKey("rotation"))
             setRotation(-Float.parseFloat(attributeMap.get("rotation")));
@@ -148,5 +153,9 @@ public class SceneObject extends Actor {
 
     public SpineObject getSpineObject() {
         return spineObject;
+    }
+
+    public SceneCplx getSceneCplx() {
+        return sceneCplx;
     }
 }

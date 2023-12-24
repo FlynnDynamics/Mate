@@ -42,9 +42,10 @@
     <property name="spriteshadow" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="80" gid="61" x="3642" y="1380" width="565" height="660"/>
-  <object id="81" gid="61" x="4196" y="1318" width="565" height="660"/>
-  <object id="82" gid="58" x="3682" y="1316" width="1180" height="944"/>
-  <object id="83" gid="60" x="3160" y="1390" width="512" height="512"/>
+  <object id="82" type="complex" gid="58" x="3682" y="1316" width="1180" height="944">
+   <properties>
+    <property name="cplx" value="house.tmx"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
