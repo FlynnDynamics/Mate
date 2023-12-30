@@ -63,6 +63,8 @@ public class DayCycleLight extends LightObject {
     }
 
     public Color getCurrentColor() {
+        if (currentColor == null)
+            currentColor = new Color();
         return currentColor;
     }
 }

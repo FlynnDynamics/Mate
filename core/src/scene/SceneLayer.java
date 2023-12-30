@@ -47,8 +47,7 @@ public class SceneLayer extends Group {
     public void addParticle(Map<String, String> attributeMap, Map<String, String> propertyMap) {
         if (particleObjects == null)
             particleObjects = new Array<>();
-        ParticleObject particleObject = new ParticleObject(this, propertyMap);
-        particleObject.createParticleEffect(Float.parseFloat(attributeMap.get("x")), Float.parseFloat(attributeMap.get("y")));
+        ParticleObject particleObject = new ParticleObject(this, propertyMap,Float.parseFloat(attributeMap.get("x")), Float.parseFloat(attributeMap.get("y")));
         particleObjects.add(particleObject);
     }
 

@@ -22,7 +22,6 @@ import org.xml.sax.SAXException;
 import screen.MateCanvas;
 
 import javax.xml.parsers.ParserConfigurationException;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,6 +73,9 @@ public class Scene {
         sceneStage.draw();
 
         for (LightObject lightObject : castLights)
+            lightObject.update();
+
+        for (LightObject lightObject : staticLights)
             lightObject.update();
 
         globalHandler.setCombinedMatrix(MateCanvas.sceneCamera);
@@ -227,31 +229,13 @@ public class Scene {
             if (!attributeMap.containsKey("type"))
                 attributeMap.put("type", "");
 
-            String type = attributeMap.get("type");
-            switch (type) {
-                case "poly":
-                    sceneLayer.addScenePoly(attributeMap, propertyMap, node.getChildNodes().item(i).getChildNodes().item(3).getAttributes().getNamedItem("points").getNodeValue());
-                    continue;
-                case "pointlight":
-                    sceneLayer.addPointLight(attributeMap, propertyMap);
-                    continue;
-                case "particle":
-                    sceneLayer.addParticle(attributeMap, propertyMap);
-                    continue;
-                case "complex":
-                    createComplexEntity(attributeMap, propertyMap, sceneLayer);
-                    continue;
-                default:
-                    createDefaultEntity(attributeMap, propertyMap, sceneLayer, null);
-
-            }
+            processesType(attributeMap, propertyMap, sceneLayer);
         }
     }
 
     private void createDefaultEntity(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer, SceneCplx sceneCplx) throws ParserConfigurationException, IOException, SAXException {
 
-        long gIdRaw = Long.parseLong((attributeMap.get("gid")));
-        int[] flags = mateSceneLoader.extractBits(gIdRaw);
+        int[] flags = getFlags(attributeMap);
         int gId = flags[3];
 
         String[] tilesetInfo;
@@ -265,8 +249,6 @@ public class Scene {
 
         Map<String, Map<String, String>> tilesetDataMap = mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get(gId - Integer.parseInt(tilesetInfo[0]));
         String[] textureKey = Gdx.files.internal(tilesetDataMap.get("image").get("source")).name().split("\\.");
-
-        System.out.println(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
 
         Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
         SceneObject sceneObject = new SceneObject(sprite, true, sceneLayer);
@@ -303,6 +285,9 @@ public class Scene {
         Map<String, String> sceneAttributes = readSceneAttributes(nodeList);
         Map<String, String> sceneProperties = readSceneProperties(nodeList);
 
+        sceneCplx.setRawSize(new Vector2(Float.parseFloat(sceneAttributes.get("width")) * Float.parseFloat(sceneAttributes.get("tilewidth")), Float.parseFloat(sceneAttributes.get("height")) * Float.parseFloat(sceneAttributes.get("tileheight"))));
+        sceneCplx.setSize(new Vector2(Float.parseFloat(attributeMap.get("width")), Float.parseFloat(attributeMap.get("height"))));
+
         for (int i = 0; i < nodeList.item(0).getChildNodes().getLength(); i++) {
             String nodeName = nodeList.item(0).getChildNodes().item(i).getNodeName();
 
@@ -324,13 +309,48 @@ public class Scene {
                 Map<String, String> objectAttributes = extractAttributes(node, j);
                 Map<String, String> objectProperties = extractProperties(node, j);
 
-               // System.out.println(objectAttributes.get("id"));
+                objectAttributes.put("y", String.valueOf(Float.valueOf(objectAttributes.get("y")) - Float.parseFloat(sceneAttributes.get("tileheight"))));
+
+                objectAttributes.put("x", String.valueOf((Float.valueOf(objectAttributes.get("x")) * sceneCplx.getScale().x) + Float.parseFloat(attributeMap.get("x"))));
+                objectAttributes.put("y", String.valueOf((Float.valueOf(objectAttributes.get("y")) * sceneCplx.getScale().y) + Float.parseFloat(attributeMap.get("y"))));
+
+                objectAttributes.put("width", String.valueOf(Float.parseFloat(objectAttributes.get("width")) * sceneCplx.getScale().x));
+                objectAttributes.put("height", String.valueOf(Float.parseFloat(objectAttributes.get("height")) * sceneCplx.getScale().y));
+
+                if (!objectAttributes.containsKey("type"))
+                    objectAttributes.put("type", "");
+
+                if (!objectAttributes.get("type").equals("")) {
+                    processesType(objectAttributes, objectProperties, sceneLayer);
+                    continue;
+                }
+
                 createDefaultEntity(objectAttributes, objectProperties, sceneLayer, sceneCplx);
 
             }
 
         }
 
+    }
+
+    private void processesType(Map<String, String> attributeMap, Map<String, String> propertyMap, SceneLayer sceneLayer) throws ParserConfigurationException, IOException, SAXException {
+        switch (attributeMap.get("type")) {
+            case "pointlight":
+                sceneLayer.addPointLight(attributeMap, propertyMap);
+                break;
+            case "particle":
+                sceneLayer.addParticle(attributeMap, propertyMap);
+                break;
+            case "complex":
+                createComplexEntity(attributeMap, propertyMap, sceneLayer);
+                break;
+            default:
+                createDefaultEntity(attributeMap, propertyMap, sceneLayer, null);
+        }
+    }
+
+    private int[] getFlags(Map<String, String> attributeMap) {
+        return mateSceneLoader.extractBits(Long.parseLong((attributeMap.get("gid"))));
     }
 
     private Map<String, String> extractAttributes(Node node, int index) {

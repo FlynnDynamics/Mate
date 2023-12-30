@@ -16,6 +16,7 @@ public class SceneCplx {
 
     private Vector2 position;
     private Vector2 size;
+    private Vector2 rawSize;
 
     private Array<SceneObject> sceneObjects;
 
@@ -25,8 +26,36 @@ public class SceneCplx {
         sceneObjects.add(sceneObject);
     }
 
+    public Vector2 getScale() {
+        return new Vector2(size.x / rawSize.x, size.y / rawSize.y);
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
+
+    public void setRawSize(Vector2 rawSize) {
+        this.rawSize = rawSize;
+    }
+
+    public void setSize(Vector2 size) {
+        this.size = size;
+    }
+
     public void setSceneObjects(Array<SceneObject> sceneObjects) {
         this.sceneObjects = sceneObjects;
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Vector2 getSize() {
+        return size;
+    }
+
+    public Vector2 getRawSize() {
+        return rawSize;
     }
 
     public Scene getScene() {

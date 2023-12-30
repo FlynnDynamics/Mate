@@ -11,7 +11,7 @@ public class DesktopLauncher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setMaximized(true);
         config.setIdleFPS(10);
-        config.setForegroundFPS(60);
+        config.setForegroundFPS(75);
         config.useVsync(false);
         config.setTitle("Mate-" + GLOBAL_VERSION);
         //config.setBackBufferConfig(8, 8, 8, 8, 16, 0, 8);

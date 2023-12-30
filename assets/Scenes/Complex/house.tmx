@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="512" tileheight="512" infinite="0" nextlayerid="4" nextobjectid="7">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="640" tileheight="512" infinite="0" nextlayerid="5" nextobjectid="20">
  <tileset firstgid="1" source="../../TileSets/Hextiles.tsx"/>
  <objectgroup id="2" name="Object Layer 1">
   <object id="1" gid="34" x="0" y="512" width="640" height="512"/>
  </objectgroup>
- <objectgroup id="3" name="Object Layer 2">
-  <object id="5" gid="35" x="276.5" y="493.5" width="199" height="124.707">
+ <objectgroup id="3" name="Object Layer 2"/>
+ <objectgroup id="4" name="Object Layer 3">
+  <object id="8" type="pointlight" x="211.379" y="206.94" width="66.7781" height="61.119">
    <properties>
-    <property name="animation" value="FrogDemo"/>
-    <property name="animationfirststate" value="animation2"/>
-    <property name="masky" type="float" value="0"/>
-    <property name="offsety" type="float" value="20"/>
-    <property name="originoffsetx" type="float" value="0"/>
-    <property name="originoffsety" type="float" value="-150"/>
-    <property name="spriteshadow" type="bool" value="true"/>
+    <property name="cast" type="bool" value="false"/>
+    <property name="color" type="color" value="#ffffff00"/>
+    <property name="cycle" type="bool" value="false"/>
    </properties>
+   <ellipse/>
+  </object>
+  <object id="17" type="pointlight" x="140.611" y="308.085" width="50.7781" height="46.4749">
+   <properties>
+    <property name="cast" type="bool" value="false"/>
+    <property name="color" type="color" value="#ffffff00"/>
+    <property name="cycle" type="bool" value="false"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="18" type="pointlight" x="142.611" y="375.661" width="55.6114" height="50.8986">
+   <properties>
+    <property name="cast" type="bool" value="false"/>
+    <property name="color" type="color" value="#ffffff00"/>
+    <property name="cycle" type="bool" value="false"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="19" type="pointlight" x="345.611" y="355.44" width="123.593" height="113.119">
+   <properties>
+    <property name="cast" type="bool" value="false"/>
+    <property name="color" type="color" value="#ffffff00"/>
+    <property name="cycle" type="bool" value="false"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

@@ -69,13 +69,24 @@ public class LightObject {
     protected float timeS, timeW, timeP;
 
     public void update() {
+        System.out.println(MateEngine.calculateLuminance(scene.getDayCycleLight().getCurrentColor()));
+        if (cycle)
+            if (MateEngine.calculateLuminance(scene.getDayCycleLight().getCurrentColor()) >= 0.5f)
+                setActive(false);
+            else
+                setActive(true);
+
+        if (!active)
+            return;
+
         if (shake)
             if (timeS > 0.1f) {
                 timeS = 0;
                 if (random == null)
+
                     random = new Random();
-                float x = random.nextFloat(position.x, position.x + 10);
-                float y = random.nextFloat(position.y, position.y + 10);
+                float x = random.nextFloat(position.x, position.x + 20);
+                float y = random.nextFloat(position.y, position.y + 20);
                 pointLight.setPosition(x, y);
             } else
                 timeS += Gdx.graphics.getDeltaTime();
@@ -94,8 +105,6 @@ public class LightObject {
                 //Pulse Code
             } else
                 timeP += Gdx.graphics.getDeltaTime();
-        if (cycle)
-            setColor(new Color(color.r, color.g, color.b, 1 - MateEngine.calculateLuminance(scene.getDayCycleLight().getCurrentColor())));
     }
 
     public void setColor(Color color) {
@@ -124,10 +133,8 @@ public class LightObject {
 
     public void setActive(boolean active) {
         this.active = active;
-        if (pointLight != null) {
+        if (pointLight != null)
             pointLight.setActive(active);
-            update();
-        }
     }
 
     public Vector2 getPosition() {
