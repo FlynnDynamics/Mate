@@ -49,7 +49,7 @@ public class ShadowObject {
         //-----------------
         Texture texture;
         if (degree > 90)
-            texture = getTexture(position, batch, true);
+            texture = getTexture(position, batch, false);
         else
             texture = getTexture(position, batch, false);
 

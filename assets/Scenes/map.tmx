@@ -20,10 +20,18 @@
 </data>
  </layer>
  <objectgroup id="7" name="Object Layer 2">
-  <object id="116" gid="34" x="3609" y="1927" width="894" height="1190"/>
+  <object id="116" gid="34" x="3609" y="1927" width="894" height="1190">
+   <properties>
+    <property name="masky" type="float" value="70"/>
+    <property name="offsety" type="float" value="0"/>
+    <property name="originoffsetx" type="float" value="0"/>
+    <property name="originoffsety" type="float" value="-500"/>
+    <property name="spriteshadow" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="118" gid="60" x="509.333" y="2288" width="1608" height="1608"/>
   <object id="119" gid="61" x="1658" y="1250" width="624" height="624"/>
-  <object id="126" type="pointlight" x="3344" y="781.543" width="1536" height="1239.58">
+  <object id="126" type="pointlight" x="2428" y="-334.457" width="1536" height="1239.58">
    <properties>
     <property name="cast" type="bool" value="false"/>
     <property name="color" type="color" value="#ffffffff"/>

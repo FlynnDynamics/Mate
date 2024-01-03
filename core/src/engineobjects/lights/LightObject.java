@@ -69,7 +69,6 @@ public class LightObject {
     protected float timeS, timeW, timeP;
 
     public void update() {
-        System.out.println(MateEngine.calculateLuminance(scene.getDayCycleLight().getCurrentColor()));
         if (cycle)
             if (MateEngine.calculateLuminance(scene.getDayCycleLight().getCurrentColor()) >= 0.5f)
                 setActive(false);

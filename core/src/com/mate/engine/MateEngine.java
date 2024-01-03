@@ -98,8 +98,6 @@ public class MateEngine extends Game {
         else if (a >= 0.6f)
             return 0.6f;
         return a;
-
-
     }
 
     public MateSceneLoader getMateAssetManager() {

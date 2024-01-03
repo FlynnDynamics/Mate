@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map.tmx",
+    "activeFile": "Complex/house.tmx",
     "expandedProjectPaths": [
         "C:/work home/Mate/assets/TileSets",
-        "Complex",
-        "."
+        ".",
+        "Complex"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -50,15 +50,15 @@
         },
         "Complex/house.tmx": {
             "expandedObjectLayers": [
-                4,
                 3,
+                4,
                 2
             ],
-            "scale": 0.33,
-            "selectedLayer": 1,
+            "scale": 0.75,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 322.72727272727275,
-                "y": 256.060606060606
+                "x": 331.33333333333337,
+                "y": 316
             }
         },
         "TileSets/Hextiles.tsx": {
@@ -78,14 +78,15 @@
         },
         "map.tmx": {
             "expandedObjectLayers": [
-                5,
-                7
+                8,
+                7,
+                5
             ],
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2074,
-                "y": 1108
+                "x": 3286,
+                "y": 1016
             }
         },
         "map_01.tmx": {
@@ -113,18 +114,19 @@
     "map.width": 1,
     "openFiles": [
         "map.tmx",
-        "C:/work home/Mate/assets/TileSets/hexe.tsx"
+        "C:/work home/Mate/assets/TileSets/hexe.tsx",
+        "Complex/house.tmx"
     ],
     "project": "mate.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
-        "C:/work home/Mate/assets/TileSets/hexe.tsx",
         "map.tmx",
+        "C:/work home/Mate/assets/TileSets/hexe.tsx",
+        "Complex/house.tmx",
         "C:/work home/Mate/assets/TileSets/bodentiles_02.tsx",
         "C:/work home/Mate/assets/TileSets/bodentiles.tsx",
         "C:/work home/Mate/assets/TileSets/grass.tsx",
         "map_01.tmx",
-        "Complex/house.tmx",
         "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
         "C:/work home/Mate/assets/TileSets/1024.tsx",
         "house.tmx",
