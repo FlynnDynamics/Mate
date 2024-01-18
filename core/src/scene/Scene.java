@@ -293,7 +293,7 @@ public class Scene {
 
             if (!nodeName.equals("objectgroup"))
                 continue;
-//sdfsfdsdfsdasasdasdadsdasasdasd
+//sdfsfdsdfsdasasdasdadsdasasdasdwer
             Map<String, String> layerAttributes = readLayerAttributes(nodeList, i);
             Map<String, String> layerProperties = readLayerProperties(nodeList, i);
 
