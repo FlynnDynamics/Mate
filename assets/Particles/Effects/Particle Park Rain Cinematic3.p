@@ -2,16 +2,16 @@ rain
 - Delay -
 active: false
 - Duration - 
-lowMin: 10000.0
-lowMax: 10000.0
+lowMin: 5000.0
+lowMax: 5000.0
 - Count - 
 min: 0
-max: 200
+max: 300
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 50.0
-highMax: 50.0
+highMin: 150.0
+highMax: 150.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -40,8 +40,8 @@ shape: line
 - Spawn Width - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 800.0
-highMax: 800.0
+highMin: 2560.0
+highMax: 2560.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -60,8 +60,8 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 204.0
-highMax: 408.0
+highMin: 50.0
+highMax: 100.0
 relative: false
 scalingCount: 2
 scaling0: 0.0
@@ -74,7 +74,7 @@ active: true
 lowMin: 0.0
 lowMax: 0.0
 highMin: 0.0
-highMax: 4.0
+highMax: 10.0
 relative: false
 scalingCount: 2
 scaling0: 0.09803922
@@ -86,8 +86,8 @@ timeline1: 0.31506848
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 1000.0
-highMax: 1500.0
+highMin: 1500.0
+highMax: 2000.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -97,8 +97,8 @@ timeline0: 0.0
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 225.0
-highMax: 225.0
+highMin: 265.0
+highMax: 265.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -108,8 +108,8 @@ timeline0: 0.0
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 45.0
-highMax: 45.0
+highMin: 85.0
+highMax: 85.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -121,8 +121,8 @@ active: false
 active: false
 - Tint - 
 colorsCount: 3
-colors0: 1.0
-colors1: 1.0
+colors0: 0.8666667
+colors1: 0.972549
 colors2: 1.0
 timelineCount: 1
 timeline0: 0.0
@@ -147,5 +147,5 @@ behind: false
 premultipliedAlpha: false
 spriteMode: single
 - Image Paths -
-/E:/workspace/Particle Park/particles/images/rain-cinematic.png
+/C:/work home/Mate/assets/Particles/Images/rain-cinematic.png
 

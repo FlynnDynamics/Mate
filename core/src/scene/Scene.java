@@ -257,7 +257,7 @@ public class Scene {
             applyRotation(attributeMap);
 
         if (tilesetDataMap.containsKey("properties"))
-            tilesetDataMap.get("properties").forEach((key, value) -> propertyMap.putIfAbsent(key, value));
+            tilesetDataMap.get("properties").forEach(propertyMap::putIfAbsent);
 
         propertyMap.put("reswidth", tilesetDataMap.get("image").get("width"));
         propertyMap.put("resheight", tilesetDataMap.get("image").get("height"));
@@ -293,7 +293,7 @@ public class Scene {
 
             if (!nodeName.equals("objectgroup"))
                 continue;
-
+//sdf
             Map<String, String> layerAttributes = readLayerAttributes(nodeList, i);
             Map<String, String> layerProperties = readLayerProperties(nodeList, i);
 
@@ -309,10 +309,10 @@ public class Scene {
                 Map<String, String> objectAttributes = extractAttributes(node, j);
                 Map<String, String> objectProperties = extractProperties(node, j);
 
-                objectAttributes.put("y", String.valueOf(Float.valueOf(objectAttributes.get("y")) - Float.parseFloat(sceneAttributes.get("tileheight"))));
+                objectAttributes.put("y", String.valueOf(Float.parseFloat(objectAttributes.get("y")) - Float.parseFloat(sceneAttributes.get("tileheight"))));
 
-                objectAttributes.put("x", String.valueOf((Float.valueOf(objectAttributes.get("x")) * sceneCplx.getScale().x) + Float.parseFloat(attributeMap.get("x"))));
-                objectAttributes.put("y", String.valueOf((Float.valueOf(objectAttributes.get("y")) * sceneCplx.getScale().y) + Float.parseFloat(attributeMap.get("y"))));
+                objectAttributes.put("x", String.valueOf((Float.parseFloat(objectAttributes.get("x")) * sceneCplx.getScale().x) + Float.parseFloat(attributeMap.get("x"))));
+                objectAttributes.put("y", String.valueOf((Float.parseFloat(objectAttributes.get("y")) * sceneCplx.getScale().y) + Float.parseFloat(attributeMap.get("y"))));
 
                 objectAttributes.put("width", String.valueOf(Float.parseFloat(objectAttributes.get("width")) * sceneCplx.getScale().x));
                 objectAttributes.put("height", String.valueOf(Float.parseFloat(objectAttributes.get("height")) * sceneCplx.getScale().y));
@@ -320,7 +320,7 @@ public class Scene {
                 if (!objectAttributes.containsKey("type"))
                     objectAttributes.put("type", "");
 
-                if (!objectAttributes.get("type").equals("")) {
+                if (!objectAttributes.get("type").isEmpty()) {
                     processesType(objectAttributes, objectProperties, sceneLayer);
                     continue;
                 }
@@ -366,7 +366,7 @@ public class Scene {
     private Map<String, String> extractProperties(Node node, int index) {
         Map<String, String> propertyMap = new HashMap<>();
         Node childNode = node.getChildNodes().item(index);
-        if (childNode.getChildNodes() != null && childNode.getChildNodes().getLength() != 0) {
+        if (childNode.getChildNodes().getLength() != 0) {
             NodeList properties = childNode.getChildNodes().item(1).getChildNodes();
             for (int a = 0; a < properties.getLength(); a++) {
                 Node propertyNode = properties.item(a);

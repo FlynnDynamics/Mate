@@ -8,7 +8,7 @@ import scene.SceneObject;
 
 public class SpineObject {
 
-    private SceneObject sceneObject;
+    private final SceneObject sceneObject;
 
     private AnimationState animationState;
     private TextureAtlas spineAtlas;
@@ -57,16 +57,11 @@ public class SpineObject {
     }
 
     public boolean isFlipX() {
-        if (skeleton.getScaleX() < 0) {
-            return true;
-        }
-        return false;
+        return skeleton.getScaleX() < 0;
     }
 
     public boolean isFlipY() {
-        if (skeleton.getScaleY() < 0)
-            return true;
-        return false;
+        return skeleton.getScaleY() < 0;
     }
 
     private boolean flipCenter = true;
