@@ -1,23 +1,21 @@
 package screen;
 
 import box2dLight.RayHandler;
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mate.engine.MateEngine;
 import com.mate.engine.MateUI;
-import scene.Scene;
 import org.xml.sax.SAXException;
+import scene.Scene;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -100,6 +98,8 @@ public class MateCanvas implements Screen, InputProcessor {
         //Gdx.gl.glClearColor(0, 0, 0, 1);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         updateCamera();
+
+
         currentScene.render();
         mateUI.render();
     }

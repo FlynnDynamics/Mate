@@ -5,8 +5,8 @@
     },
     "activeFile": "map.tmx",
     "expandedProjectPaths": [
-        "C:/work home/Mate/assets/TileSets",
         "Complex",
+        "C:/work home/Mate/assets/TileSets",
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -46,12 +46,12 @@
         "C:/work home/Mate/assets/TileSets/hexe.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.0625,
-            "scaleInEditor": 0.06
+            "scaleInEditor": 0.0625
         },
         "Complex/house.tmx": {
             "expandedObjectLayers": [
-                2,
                 3,
+                2,
                 4
             ],
             "scale": 0.75,
@@ -80,11 +80,11 @@
             "expandedObjectLayers": [
                 7
             ],
-            "scale": 0.25,
+            "scale": 0.125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2826,
-                "y": 700
+                "x": 3292,
+                "y": 1720
             }
         },
         "map_01.tmx": {
@@ -112,15 +112,14 @@
     "map.width": 1,
     "openFiles": [
         "map.tmx",
-        "C:/work home/Mate/assets/TileSets/hexe.tsx",
-        "Complex/house.tmx"
+        "C:/work home/Mate/assets/TileSets/hexe.tsx"
     ],
     "project": "mate.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "Complex/house.tmx",
         "C:/work home/Mate/assets/TileSets/hexe.tsx",
         "map.tmx",
+        "Complex/house.tmx",
         "C:/work home/Mate/assets/TileSets/bodentiles_02.tsx",
         "C:/work home/Mate/assets/TileSets/bodentiles.tsx",
         "C:/work home/Mate/assets/TileSets/grass.tsx",

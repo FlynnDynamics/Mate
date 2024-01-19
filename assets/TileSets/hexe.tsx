@@ -26,7 +26,14 @@
   <image width="128" height="128" source="../res/Hexe/Tile_Pflanze_Algen.png"/>
  </tile>
  <tile id="9">
-  <image width="989" height="1187" source="../res/Hexe/tree.png"/>
+  <properties>
+   <property name="masky" type="float" value="70"/>
+   <property name="offsety" type="float" value="0"/>
+   <property name="originoffsetx" type="float" value="50"/>
+   <property name="originoffsety" type="float" value="-500"/>
+   <property name="spriteshadow" type="bool" value="true"/>
+  </properties>
+  <image width="894" height="1190" source="../res/Hexe/tree.png"/>
  </tile>
  <tile id="10">
   <image width="1193" height="1137" source="../res/Hexe/tt.png"/>

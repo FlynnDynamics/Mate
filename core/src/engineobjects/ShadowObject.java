@@ -11,9 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.crashinvaders.vfx.framebuffer.VfxFrameBuffer;
 import com.mate.engine.MateEngine;
+import engineobjects.lights.DayCycleLight;
 import engineobjects.lights.LightObject;
 import enums.ShadowType;
-import engineobjects.lights.DayCycleLight;
 import scene.SceneObject;
 import screen.MateCanvas;
 
@@ -49,7 +49,7 @@ public class ShadowObject {
         //-----------------
         Texture texture;
         if (degree > 90)
-            texture = getTexture(position, batch, false);
+            texture = getTexture(position, batch, true);
         else
             texture = getTexture(position, batch, false);
 
@@ -84,7 +84,6 @@ public class ShadowObject {
             batch.setColor(new Color(0, 0, 0, MateEngine.calculateLuminance(((DayCycleLight) light).getCurrentColor())));
         } else
             batch.setColor(new Color(0, 0, 0, 0.6f));
-
 
         batch.draw(region, vp.x + 0 * (1 / MateCanvas.sceneCamera.zoom), vp.y + offsetY * (1 / MateCanvas.sceneCamera.zoom), centerX * (1 / MateCanvas.sceneCamera.zoom), centerY * (1 / MateCanvas.sceneCamera.zoom), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), scaleX, scaleY, degree + 90);
         batch.setColor(Color.WHITE);
