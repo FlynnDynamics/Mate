@@ -31,17 +31,11 @@
 </data>
  </layer>
  <objectgroup id="7" name="Object Layer 2">
-  <object id="162" gid="28" x="574.424" y="462.364" width="405.319" height="254">
+  <object id="162" gid="28" x="1044.12" y="844.182" width="405.319" height="254">
    <properties>
     <property name="originoffsety" type="float" value="-100"/>
    </properties>
   </object>
-  <object id="165" gid="2147483676" x="609.341" y="1163" width="261.702" height="164">
-   <properties>
-    <property name="originoffsety" type="float" value="-100"/>
-   </properties>
-  </object>
-  <object id="166" gid="34" x="1158.45" y="1078.64" width="894" height="1190"/>
   <object id="168" type="particle" x="792" y="864">
    <properties>
     <property name="cast" type="bool" value="true"/>

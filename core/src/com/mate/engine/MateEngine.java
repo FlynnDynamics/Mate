@@ -4,9 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -15,7 +12,6 @@ import screen.MateCanvas;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MateEngine extends Game {
     private MateSceneLoader mateSceneLoader;
@@ -98,6 +94,15 @@ public class MateEngine extends Game {
         else if (a >= 0.6f)
             return 0.6f;
         return a;
+    }
+
+    public static boolean isInView(OrthographicCamera camera, Vector2 position) {
+        Vector3 ps = camera.project(new Vector3(position.x, position.y, 0));
+
+        if (ps.x <= 0 || ps.x >= Gdx.graphics.getWidth() || ps.y <= 0 || ps.y >= Gdx.graphics.getHeight())
+            return false;
+        return true;
+
     }
 
     public MateSceneLoader getMateAssetManager() {

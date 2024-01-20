@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.mate.engine.MateEngine;
 import engineobjects.ParticleObject;
 import engineobjects.ShadowObject;
 import engineobjects.SpineObject;
 import enums.ShadowType;
+import screen.MateCanvas;
 
 import java.util.Map;
 
@@ -73,7 +75,7 @@ public class SceneObject extends Actor {
     private Array<ParticleObject> particleObjects;
 
     public void drawShadow(Batch batch, float parentAlpha) {
-        if (spriteShadow) {
+        if (spriteShadow && MateEngine.isInView(MateCanvas.sceneCamera, getCenterPosition())) {
             Vector2 tmp = new Vector2(this.getX(), this.getY());
             shadowObject.createShadow(ShadowType.TYPE_1, tmp, batch);
         }
