@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="5" tilewidth="512" tileheight="480" infinite="0" nextlayerid="13" nextobjectid="169">
+ <properties>
+  <property name="0" type="color" value="#ff120046"/>
+  <property name="1" type="color" value="#ffff8000"/>
+  <property name="2" type="color" value="#ffffffff"/>
+  <property name="3" type="color" value="#ffff8000"/>
+  <property name="ambientlight" type="color" value="#ff686868"/>
+  <property name="daycyclelight" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../TileSets/Grass.tsx"/>
+ <tileset firstgid="25" source="../TileSets/hexe.tsx"/>
+ <tileset firstgid="62" source="../TileSets/scenetest.tsx"/>
+ <tileset firstgid="92" source="../TileSets/scenetest_2.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="10" height="5">
+  <data encoding="csv">
+77,78,79,80,81,0,0,0,0,0,
+82,83,84,85,86,0,0,0,0,0,
+87,88,89,90,91,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="12" name="Tile Layer 2" width="10" height="5">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+92,0,0,93,94,0,0,0,0,0,
+95,96,0,97,98,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="7" name="Object Layer 2">
+  <object id="162" gid="28" x="574.424" y="462.364" width="405.319" height="254">
+   <properties>
+    <property name="originoffsety" type="float" value="-100"/>
+   </properties>
+  </object>
+  <object id="163" type="pointlight" x="3276.2" y="1239.44" width="605.297" height="554">
+   <properties>
+    <property name="cast" type="bool" value="false"/>
+    <property name="color" type="color" value="#ff00ffff"/>
+    <property name="cycle" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="164" type="pointlight" x="2433.35" y="2555.81" width="355.297" height="325.187">
+   <properties>
+    <property name="cast" type="bool" value="false"/>
+    <property name="color" type="color" value="#ff00ffff"/>
+    <property name="cycle" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="165" gid="2147483676" x="609.341" y="1163" width="261.702" height="164">
+   <properties>
+    <property name="originoffsety" type="float" value="-100"/>
+   </properties>
+  </object>
+  <object id="166" gid="34" x="3426.45" y="1074.64" width="894" height="1190"/>
+  <object id="168" type="particle" x="792" y="864">
+   <properties>
+    <property name="cast" type="bool" value="true"/>
+    <property name="color" type="color" value="#ffff5500"/>
+    <property name="cycle" type="bool" value="true"/>
+    <property name="distance" type="float" value="3000"/>
+    <property name="light" type="bool" value="true"/>
+    <property name="particle" value="flame.p"/>
+    <property name="scale" type="float" value="1"/>
+    <property name="shake" type="bool" value="true"/>
+    <property name="wobble" type="bool" value="false"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>

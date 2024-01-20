@@ -69,7 +69,7 @@ project(":core") {
 task writeAllAssetsToFile {
     doLast {
         // projectfolder/assets
-        def assetsFolder = new File("${project.rootDir}/assets/TileSets")
+        def assetsFolder = new File("${project.rootDir}/assets/tilesets")
         // projectfolder/assets/assets.txt
         def assetsFile = new File(assetsFolder, "assets.txt")
         // delete that file in case we've already created it

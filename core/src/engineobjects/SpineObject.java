@@ -22,9 +22,9 @@ public class SpineObject {
     }
 
     private void initSpine(String path, String firstState) {
-        spineAtlas = new TextureAtlas(Gdx.files.internal("Skeletons/" + path + "/" + path + ".atlas"));
+        spineAtlas = new TextureAtlas(Gdx.files.internal("skeleton/" + path + "/" + path + ".atlas"));
         SkeletonJson json = new SkeletonJson(spineAtlas);
-        skeleton = new Skeleton(json.readSkeletonData(Gdx.files.internal("Skeletons/" + path + "/skeleton.json")));
+        skeleton = new Skeleton(json.readSkeletonData(Gdx.files.internal("skeleton/" + path + "/skeleton.json")));
 
         resWidth = skeleton.getData().getWidth();
         resHeight = skeleton.getData().getHeight();

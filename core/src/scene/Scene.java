@@ -149,7 +149,7 @@ public class Scene {
     }
 
     private void createScene() throws ParserConfigurationException, IOException, SAXException {
-        Document document = mateSceneLoader.readXmlDocument("Scenes/" + sceneName);
+        Document document = mateSceneLoader.readXmlDocument("scene/" + sceneName);
         NodeList nodeList = document.getChildNodes();
         configureScene(nodeList);
 
@@ -186,7 +186,7 @@ public class Scene {
                 int[] flags = mateSceneLoader.extractBits(longArray[countOne][countTwo]);
                 longArray[countOne][countTwo] = flags[3];
 
-                String[] tilesetInfo = mateSceneLoader.getTilesetInfo((int) longArray[countOne][countTwo], "Scenes/" + sceneName);
+                String[] tilesetInfo = mateSceneLoader.getTilesetInfo((int) longArray[countOne][countTwo], "scene/" + sceneName);
                 initTileSet(tilesetInfo[1]);
                 initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
 
@@ -240,16 +240,15 @@ public class Scene {
 
         String[] tilesetInfo;
         if (sceneCplx != null)
-            tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/Complex/" + sceneCplx.getCplxFileName());
+            tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "scene/Complex/" + sceneCplx.getCplxFileName());
         else
-            tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "Scenes/" + sceneName);
+            tilesetInfo = mateSceneLoader.getTilesetInfo(gId, "scene/" + sceneName);
 
         initTileSet(tilesetInfo[1]);
         initTextureAtlas(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]);
 
         Map<String, Map<String, String>> tilesetDataMap = mateSceneLoader.getTilesetData().get(tilesetInfo[1]).get(gId - Integer.parseInt(tilesetInfo[0]));
         String[] textureKey = Gdx.files.internal(tilesetDataMap.get("image").get("source")).name().split("\\.");
-
         Sprite sprite = new Sprite(atlasMap.get(Gdx.files.internal(tilesetInfo[1]).name().split("\\.")[0]).findRegion(textureKey[0]));
         SceneObject sceneObject = new SceneObject(sprite, true, sceneLayer);
 
@@ -279,7 +278,7 @@ public class Scene {
         String cplxName = propertyMap.get("cplx");
         SceneCplx sceneCplx = new SceneCplx(this, Integer.parseInt(attributeMap.get("id")), cplxName);
 
-        Document document = mateSceneLoader.readXmlDocument("Scenes/Complex/" + cplxName);
+        Document document = mateSceneLoader.readXmlDocument("scene/Complex/" + cplxName);
         NodeList nodeList = document.getChildNodes();
 
         Map<String, String> sceneAttributes = readSceneAttributes(nodeList);
@@ -402,7 +401,7 @@ public class Scene {
     private void initTextureAtlas(String path) {
         if (atlasMap.containsKey(path))
             return;
-        TextureAtlas textureAtlas = new TextureAtlas("TextureAtlases/" + path + ".atlas");
+        TextureAtlas textureAtlas = new TextureAtlas("atlas/" + path + ".atlas");
         atlasMap.put(path, textureAtlas);
     }
 

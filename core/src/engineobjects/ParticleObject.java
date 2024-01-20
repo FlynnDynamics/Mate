@@ -37,7 +37,7 @@ public class ParticleObject {
         cycle = Boolean.parseBoolean(propertyMap.get("cycle"));
 
         particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("Particles/Effects/" + fileName), Gdx.files.internal("Particles/Images"));
+        particleEffect.load(Gdx.files.internal("particle/Effects/" + fileName), Gdx.files.internal("particle/Images"));
 
         for (ParticleEmitter emitter : particleEffect.getEmitters())
             if (emitter != null)

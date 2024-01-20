@@ -8,6 +8,13 @@
   <image width="640" height="512" source="../res/Hexe/HAus.png"/>
  </tile>
  <tile id="3">
+  <properties>
+   <property name="masky" type="float" value="0"/>
+   <property name="offsety" type="float" value="0"/>
+   <property name="originoffsetx" type="float" value="0"/>
+   <property name="originoffsety" type="float" value="-150"/>
+   <property name="spriteshadow" type="bool" value="true"/>
+  </properties>
   <image width="600" height="376" source="../res/Hexe/Kroete.png"/>
  </tile>
  <tile id="4">

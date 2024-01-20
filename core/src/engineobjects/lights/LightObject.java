@@ -84,8 +84,8 @@ public class LightObject {
                 if (random == null)
 
                     random = new Random();
-                float x = random.nextFloat(position.x, position.x + 20);
-                float y = random.nextFloat(position.y, position.y + 20);
+                float x = random.nextFloat(position.x, position.x + 50);
+                float y = random.nextFloat(position.y, position.y + 50);
                 pointLight.setPosition(x, y);
             } else
                 timeS += Gdx.graphics.getDeltaTime();

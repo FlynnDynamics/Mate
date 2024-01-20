@@ -5,9 +5,9 @@
     },
     "activeFile": "map.tmx",
     "expandedProjectPaths": [
-        "Complex",
         "C:/work home/Mate/assets/TileSets",
-        "."
+        ".",
+        "Complex"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -46,18 +46,32 @@
         "C:/work home/Mate/assets/TileSets/hexe.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.0625,
-            "scaleInEditor": 0.0625
+            "scaleInEditor": 0.06
+        },
+        "C:/work home/Mate/assets/TileSets/scenetest.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 0.06
+        },
+        "C:/work home/Mate/assets/TileSets/scenetest2.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.5
+        },
+        "C:/work home/Mate/assets/TileSets/scenetest_2.tsx": {
+            "scaleInDock": 0.25,
+            "scaleInEditor": 0.06
         },
         "Complex/house.tmx": {
             "expandedObjectLayers": [
                 3,
-                2,
-                4
+                4,
+                2
             ],
             "scale": 0.75,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 366,
+                "x": 311.3333333333333,
                 "y": 67.33333333333334
             }
         },
@@ -81,23 +95,23 @@
                 7
             ],
             "scale": 0.125,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 3292,
-                "y": 1720
+                "x": 2560,
+                "y": 1196
             }
         },
         "map_01.tmx": {
             "scale": 0.125,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 2792,
-                "y": 3416
+                "x": 2788,
+                "y": 3408
             }
         }
     },
     "last.externalTilesetPath": "C:/work home/Mate/assets/TileSets",
-    "last.imagePath": "C:/work home/Mate/assets/res/Hexe",
+    "last.imagePath": "C:/work home/Mate/assets/res/scenetest_2",
     "last.worldFilePath": "C:/work home/Mate/assets/Scenes",
     "loadedWorlds": [
         "C:/work home/Mate/assets/Scenes/test.world"
@@ -112,22 +126,25 @@
     "map.width": 1,
     "openFiles": [
         "map.tmx",
-        "C:/work home/Mate/assets/TileSets/hexe.tsx"
+        "C:/work home/Mate/assets/TileSets/hexe.tsx",
+        "C:/work home/Mate/assets/TileSets/scenetest_2.tsx",
+        "Complex/house.tmx"
     ],
     "project": "mate.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "Complex/house.tmx",
+        "C:/work home/Mate/assets/TileSets/scenetest_2.tsx",
         "C:/work home/Mate/assets/TileSets/hexe.tsx",
         "map.tmx",
-        "Complex/house.tmx",
+        "map_01.tmx",
+        "C:/work home/Mate/assets/TileSets/scenetest2.tsx",
+        "C:/work home/Mate/assets/TileSets/scenetest.tsx",
         "C:/work home/Mate/assets/TileSets/bodentiles_02.tsx",
         "C:/work home/Mate/assets/TileSets/bodentiles.tsx",
         "C:/work home/Mate/assets/TileSets/grass.tsx",
-        "map_01.tmx",
         "C:/work home/Mate/assets/TileSets/Hextiles.tsx",
-        "C:/work home/Mate/assets/TileSets/1024.tsx",
-        "house.tmx",
-        "C:/work home/Mate/assets/TileSets/Demoset.tsx"
+        "C:/work home/Mate/assets/TileSets/1024.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1
