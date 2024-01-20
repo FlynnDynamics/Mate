@@ -39,6 +39,7 @@ public class ShadowObject {
     }
 
     private void createType_1(Vector2 position, LightObject light, Batch batch) {
+        //System.out.println(light.getPosition().x + " " + light.getPosition().y);
         Vector3 distVec = MateEngine.getDistance(light.getPosition(), sceneObject.getCenterPosition());
         //-----------------
         float degree = MateEngine.getDegree(distVec.x, distVec.y);

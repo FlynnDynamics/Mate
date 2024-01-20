@@ -84,8 +84,8 @@ public class LightObject {
                 if (random == null)
 
                     random = new Random();
-                float x = random.nextFloat(position.x, position.x + 50);
-                float y = random.nextFloat(position.y, position.y + 50);
+                float x = random.nextFloat(position.x, position.x + 10);
+                float y = random.nextFloat(position.y, position.y + 10);
                 pointLight.setPosition(x, y);
             } else
                 timeS += Gdx.graphics.getDeltaTime();
@@ -137,7 +137,15 @@ public class LightObject {
     }
 
     public Vector2 getPosition() {
+        if (shake)
+            return pointLight.getPosition();
         return position;
+    }
+
+    public float getDistance() {
+        if (wobble)
+            return pointLight.getDistance();
+        return distance;
     }
 
     public Color getColor() {
@@ -188,7 +196,4 @@ public class LightObject {
         return timeP;
     }
 
-    public float getDistance() {
-        return distance;
-    }
 }
