@@ -23,7 +23,7 @@ public class SceneObject extends Actor {
 
     private SceneCplx sceneCplx;
 
-    private boolean spriteShadow;
+    private boolean shadow;
     private ShadowObject shadowObject;
 
     private float resWidth, resHeight;
@@ -56,9 +56,9 @@ public class SceneObject extends Actor {
         if (attributeMap.containsKey("rotation"))
             setRotation(-Float.parseFloat(attributeMap.get("rotation")));
 
-        if (propertyMap.containsKey("spriteshadow") && propertyMap.get("spriteshadow").equals("true")) {
-            spriteShadow = true;
-            shadowObject = new ShadowObject(this);
+        if (propertyMap.containsKey("shadow") && propertyMap.get("shadow").equals("true")) {
+            shadow = true;
+            shadowObject = new ShadowObject(this, Enum.valueOf(ShadowType.class, propertyMap.get("shadowtype")));
             shadowObject.setOriginOffsetX(Float.parseFloat(propertyMap.get("originoffsetx")));
             shadowObject.setOriginOffsetY(Float.parseFloat(propertyMap.get("originoffsety")));
             shadowObject.setOffsetY(Float.parseFloat(propertyMap.get("offsety")));
@@ -75,9 +75,9 @@ public class SceneObject extends Actor {
     private Array<ParticleObject> particleObjects;
 
     public void drawShadow(Batch batch, float parentAlpha) {
-        if (spriteShadow && MateEngine.isInView(MateCanvas.sceneCamera, getCenterPosition())) {
+        if (shadow && MateEngine.isInView(MateCanvas.sceneCamera, getCenterPosition())) {
             Vector2 tmp = new Vector2(this.getX(), this.getY());
-            shadowObject.createShadow(ShadowType.TYPE_1, tmp, batch);
+            shadowObject.createShadow(tmp, batch);
         }
     }
 
