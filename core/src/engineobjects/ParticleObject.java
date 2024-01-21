@@ -47,6 +47,7 @@ public class ParticleObject {
         particleEffect.scaleEffect(scale);
 
         if (propertyMap.get("light").equals("true")) {
+            propertyMap.put("cycle", "false");
             lightObject = new LightObject(sceneLayer.getScene(), propertyMap);
             lightObject.createObjectLight(position.x, position.y);
         }

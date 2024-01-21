@@ -32,6 +32,8 @@ public class ShadowObject {
 
     public void createShadow(Vector2 position, Batch batch) {
         for (LightObject light : sceneObject.getSceneLayer().getScene().getCastLights()) {
+            if (!light.isActive())
+                continue;
             switch (shadowType) {
                 case TYPE_1:
                     createType_1(position, light, batch);
@@ -197,7 +199,8 @@ public class ShadowObject {
     }
 
     public void dispose() {
-        vfxFrameBuffer.dispose();
+        if (vfxFrameBuffer != null)
+            vfxFrameBuffer.dispose();
         if (maskObject != null)
             maskObject.dispose();
     }

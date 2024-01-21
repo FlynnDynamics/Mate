@@ -14,6 +14,7 @@ public class DayCycleLight extends LightObject {
         this.center = center;
         this.distance = distance;
         this.totalTicks = totalTicks;
+        this.setActive(true);
         scene.getCastLights().add(this);
     }
 
